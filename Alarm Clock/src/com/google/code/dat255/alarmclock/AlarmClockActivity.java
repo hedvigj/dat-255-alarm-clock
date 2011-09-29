@@ -12,6 +12,7 @@ public class AlarmClockActivity extends Activity {
 
 		// TEST COMMIT
 		// Test commit Sickan
+		// Second test commit Gustav
 
 	}
 }
