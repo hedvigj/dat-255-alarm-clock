@@ -9,9 +9,9 @@ public class AlarmClockActivity extends Activity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
-		if (true == Boolean.TRUE) {
 
-		}
+		// TEST COMMIT
+		// Test commit Sickan
 
 	}
 }
