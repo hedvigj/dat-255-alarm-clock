@@ -6,7 +6,7 @@
     <uses-sdk android:minSdkVersion="8" />
 
     <application android:icon="@drawable/icon" android:label="@string/app_name">
-        <activity android:name=".AlarmClockActivity"
+        <activity android:name=".view.AlarmClockActivity"
                   android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

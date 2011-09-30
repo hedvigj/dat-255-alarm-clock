@@ -1,4 +1,7 @@
-package com.google.code.dat255.alarmclock;
+package com.google.code.dat255.alarmclock.view;
+
+import com.google.code.dat255.alarmclock.R;
+import com.google.code.dat255.alarmclock.R.layout;
 
 import android.app.Activity;
 import android.os.Bundle;
