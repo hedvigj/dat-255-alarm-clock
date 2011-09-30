@@ -1,5 +1,12 @@
 package com.google.code.dat255.alarmclock.logic.alarm;
 
-public class IAlarm {
+public interface IAlarm {
+
+	/**
+	 * Gets the time when the alarm will be triggered
+	 * 
+	 * @return the time in milliseconds
+	 */
+	public long getTriggerTime();
 
 }
