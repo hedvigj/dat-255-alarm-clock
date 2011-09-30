@@ -1,6 +1,6 @@
 package com.google.code.dat255.alarmclock.logic.alarm;
 
-import com.google.code.dat255.alarmclock.logic.alarmproperties.IAlarmProperty;
+import com.google.code.dat255.alarmclock.logic.alarm.properties.IAlarmProperty;
 
 public class Alarm implements IAlarm {
 

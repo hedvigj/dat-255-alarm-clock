@@ -1,4 +1,4 @@
-package com.google.code.dat255.alarmclock.logic.alarmproperties;
+package com.google.code.dat255.alarmclock.logic.alarm.properties;
 
 
 public class TextAlarmProperty implements IAlarmProperty {
