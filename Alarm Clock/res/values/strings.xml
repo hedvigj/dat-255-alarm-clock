@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Alarm Clock</string>
+    <string name="alarm">Alarm</string>
+    <string name="group">Grupp</string>
+    <string name="home">Hem</string>
     <string name="overview">Översikt</string>
     <string name="overview_screen">OverviewScreen</string>
 </resources>

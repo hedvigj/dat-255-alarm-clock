@@ -1,7 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<RelativeLayout
   xmlns:android="http://schemas.android.com/apk/res/android"
   android:layout_width="match_parent"
   android:layout_height="match_parent">
+  	<TimePicker 
+  		android:id="@+id/alarmtimepicker"
+  		android:layout_width="250dip"
+  		android:layout_height="150dip"
+  		android:layout_alignParentTop="true"
+  		android:layout_centerInParent="true"
+  		android:layout_marginTop="30dip"
+  		/>
+   
+  	<LinearLayout 
+		android:id="@+id/linearbottom"
+		android:orientation="horizontal"
+		android:layout_width="fill_parent"
+		android:layout_height="wrap_content"
+		android:layout_alignParentBottom="true"
+		android:gravity="center_horizontal"	>
+		<Button 
+			android:id="@+id/homeButton" 
+			android:layout_height="wrap_content" 
+			android:layout_width="85dip"
+			android:text="@string/home"/>		
+		<Button 
+			android:id="@+id/overviewButton" 
+			android:layout_height="wrap_content" 
+			android:layout_width="85dip"
+			android:text="@string/overview"/>
+		<Button 
+			android:id="@+id/groupButton" 
+			android:layout_height="wrap_content" 
+			android:layout_width="85dip"
+			android:text="@string/group"/>
+		</LinearLayout>
   
-</LinearLayout>
+  
+</RelativeLayout>
