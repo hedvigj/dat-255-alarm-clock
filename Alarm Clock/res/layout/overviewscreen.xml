@@ -4,11 +4,6 @@
   android:orientation="vertical"
   android:layout_width="match_parent"
   android:layout_height="match_parent">
-  
-	<TextView
-		android:layout_width="fill_parent" 
-		android:layout_height="wrap_content" 
-		android:text="@string/overview_screen"/>
 	<LinearLayout 
 		android:id="@+id/linearbottom"
 		android:orientation="horizontal"
@@ -32,4 +27,13 @@
 			android:layout_width="85dip"
 			android:text="@string/group"/>
 	</LinearLayout>
+	
+	<ListView 
+		android:layout_width="match_parent" 
+		android:layout_height="wrap_content" 
+		android:id="@+id/listView" 
+		android:layout_centerHorizontal="true" 
+		android:layout_alignParentTop="true"
+		android:layout_above="@+id/linearbottom"/>
+		
 </RelativeLayout>
