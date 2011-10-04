@@ -8,8 +8,7 @@
     	android:layout_width="fill_parent"
     	android:layout_height="wrap_content"
     	android:layout_alignParentTop="true"
-    	android:layout_marginTop="20dip"
-    	android:gravity="center"/>
+    	android:layout_marginTop="30dip"/>
 	<LinearLayout 
 		android:id="@+id/linearbottom"
 		android:orientation="horizontal"
