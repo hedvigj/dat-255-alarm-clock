@@ -1,5 +1,7 @@
 package com.dat255.alarmclock.viewhandlers;
 
+import android.content.Context;
+
 import com.dat255.alarmclock.utilities.Date;
 
 public interface IHomeHandler {
@@ -9,7 +11,7 @@ public interface IHomeHandler {
 	 * 
 	 * @return the current date of the system formated
 	 */
-	public Date getCurrentDate();
+	public Date getCurrentDate(Context context);
 
 	/**
 	 * Change the view to the overview screen

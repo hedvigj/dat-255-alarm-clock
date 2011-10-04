@@ -2,6 +2,10 @@ package com.dat255.alarmclock.utilities;
 
 import java.util.Calendar;
 
+import android.content.Context;
+
+import com.dat255.alarmclock.R;
+
 /**
  * 
  * Date is a container for date specific values such as time
@@ -23,15 +27,17 @@ public class Date {
 		SUNDAY, MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY
 	}
 
-	public static final String[] MONTH_TO_STRING = { "NN", "January", "February", "March", "April", "May", "June", "July", "August",
-			"September", "October", "November", "December" };
+	public final String[] MONTH_TO_STRING;
 
 	/**
 	 * Set the date object with the date from an Calendar object
 	 * 
 	 * @param c
+	 * 
 	 */
-	public Date(Calendar c) {
+	public Date(Calendar c, Context context) {
+		this(context);
+
 		setHour(c.get(Calendar.HOUR_OF_DAY));
 		setMinute(c.get(Calendar.MINUTE));
 		setSecond(c.get(Calendar.SECOND));
@@ -69,8 +75,8 @@ public class Date {
 	/**
 	 * An empty date object
 	 */
-	public Date() {
-
+	public Date(Context context) {
+		this.MONTH_TO_STRING = context.getResources().getStringArray(R.array.month_array);
 	}
 
 	/**
