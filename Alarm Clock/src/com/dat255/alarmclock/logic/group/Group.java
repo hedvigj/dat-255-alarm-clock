@@ -29,7 +29,7 @@ public class Group implements IGroup {
 	public List<IAlarm> getAlarms() {
 		List<IAlarm> alarmsClone = new ArrayList<IAlarm>();
 		for (IAlarm a : alarms) {
-			alarms.add(a);
+			alarmsClone.add(a);
 		}
 		return alarmsClone;
 	}
@@ -37,16 +37,16 @@ public class Group implements IGroup {
 	@Override
 	public void addAlarm(IAlarm newAlarm) {
 		if (newAlarm != null) {
-			alarms.add(newAlarm);
+			if (!alarms.contains(newAlarm)) {
+				alarms.add(newAlarm);
+			}
 		}
 	}
 
 	@Override
 	public void removeAlarm(IAlarm alarm) {
 		if (alarm != null) {
-			if (alarms.size() > 0) {
-				alarms.remove(alarm);
-			}
+			alarms.remove(alarm);
 		}
 	}
 
