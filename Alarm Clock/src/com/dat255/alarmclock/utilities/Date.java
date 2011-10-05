@@ -3,6 +3,7 @@ package com.dat255.alarmclock.utilities;
 import java.util.Calendar;
 
 import android.content.Context;
+import android.content.res.Resources;
 
 import com.dat255.alarmclock.R;
 
@@ -21,23 +22,50 @@ public class Date {
 	private int year;
 	private int month;
 	private int dayOfMonth;
-	private DayOfWeek dayOfWeek;
+	private int dayOfWeek;
 
-	public enum DayOfWeek {
-		SUNDAY, MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY
-	}
+	public static final int SUNDAY = 0;
+	public static final int MONDAY = 1;
+	public static final int TUESDAY = 2;
+	public static final int WEDNESDAY = 3;
+	public static final int THURSDAY = 4;
+	public static final int FRIDAY = 5;
+	public static final int SATURDAY = 6;
 
 	public final String[] MONTH_TO_STRING;
+	public final String[] WEEKDAY_STRING;
 
 	/**
 	 * Set the date object with the date from an Calendar object
 	 * 
-	 * @param c
+	 * @param setCurrentTime
+	 *            is if set the time of the date to current time
+	 * @param context
+	 *            is context of the application
 	 * 
 	 */
-	public Date(Calendar c, Context context) {
+	public Date(Context context, boolean setCurrentTime) {
 		this(context);
+		if (setCurrentTime) {
+			setDateToSystemDate();
+		}
+	}
 
+	/**
+	 * An empty date object
+	 */
+	public Date(Context context) {
+		if (context == null) {
+			throw new NullPointerException("Context was empty");
+		}
+
+		Resources res = context.getResources();
+		this.MONTH_TO_STRING = res.getStringArray(R.array.month_array);
+		this.WEEKDAY_STRING = res.getStringArray(R.array.week_array);
+	}
+
+	public void setDateToSystemDate() {
+		Calendar c = Calendar.getInstance();
 		setHour(c.get(Calendar.HOUR_OF_DAY));
 		setMinute(c.get(Calendar.MINUTE));
 		setSecond(c.get(Calendar.SECOND));
@@ -48,35 +76,27 @@ public class Date {
 
 		switch (c.get(Calendar.DAY_OF_WEEK)) {
 		case Calendar.SUNDAY:
-			setDayOfWeek(DayOfWeek.SUNDAY);
+			setDayOfWeek(Date.SUNDAY);
 			break;
 		case Calendar.MONDAY:
-			setDayOfWeek(DayOfWeek.MONDAY);
+			setDayOfWeek(Date.MONDAY);
 			break;
 		case Calendar.TUESDAY:
-			setDayOfWeek(DayOfWeek.TUESDAY);
+			setDayOfWeek(Date.TUESDAY);
 			break;
 		case Calendar.WEDNESDAY:
-			setDayOfWeek(DayOfWeek.WEDNESDAY);
+			setDayOfWeek(Date.WEDNESDAY);
 			break;
 		case Calendar.THURSDAY:
-			setDayOfWeek(DayOfWeek.THURSDAY);
+			setDayOfWeek(Date.THURSDAY);
 			break;
 		case Calendar.FRIDAY:
-			setDayOfWeek(DayOfWeek.FRIDAY);
+			setDayOfWeek(Date.FRIDAY);
 			break;
 		case Calendar.SATURDAY:
-			setDayOfWeek(DayOfWeek.SATURDAY);
+			setDayOfWeek(Date.SATURDAY);
 			break;
 		}
-
-	}
-
-	/**
-	 * An empty date object
-	 */
-	public Date(Context context) {
-		this.MONTH_TO_STRING = context.getResources().getStringArray(R.array.month_array);
 	}
 
 	/**
@@ -175,6 +195,7 @@ public class Date {
 	 * @param year
 	 */
 	public void setYear(int year) {
+
 		this.year = year;
 	}
 
@@ -207,7 +228,6 @@ public class Date {
 	public void setMonth(int month) {
 		if (month < 1) {
 			this.month = 1;
-			return;
 		} else if (month > 12) {
 			this.month = 12;
 		} else {
@@ -248,20 +268,23 @@ public class Date {
 	 * @return day of week
 	 */
 	public String getDayOfWeek() {
-		if (dayOfWeek != null) {
-			return dayOfWeek.toString();
-		} else {
-			return null;
-		}
+		return WEEKDAY_STRING[dayOfWeek];
 	}
 
 	/**
-	 * Set the day of week
+	 * Set the day of week. See Date.SUNDAY to Date.SATURDAY
 	 * 
 	 * @param dayOfWee
 	 */
-	public void setDayOfWeek(DayOfWeek dayOfWeek) {
-		this.dayOfWeek = dayOfWeek;
+	public void setDayOfWeek(int dayOfWeek) {
+		if (dayOfWeek < 0) {
+			this.dayOfWeek = 0;
+			return;
+		} else if (dayOfWeek > 6) {
+			this.dayOfWeek = 6;
+		} else {
+			this.dayOfWeek = dayOfWeek;
+		}
 	}
 
 }
