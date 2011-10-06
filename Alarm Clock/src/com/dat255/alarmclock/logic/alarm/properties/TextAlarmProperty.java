@@ -1,19 +1,17 @@
 package com.dat255.alarmclock.logic.alarm.properties;
 
+import com.dat255.alarmclock.logic.alarm.IAlarm;
+
 public class TextAlarmProperty implements IAlarmProperty {
 
-	private final String text;
+	private String text;
 
 	public TextAlarmProperty(String text) {
 		this.text = text;
 	}
 
-	public String GetAlarmText() {
-		return this.text;
-	}
-
 	@Override
-	public void onAlarmSet(long triggerTime) {
+	public void onAlarmSet(IAlarm reference) {
 		// TODO Auto-generated method stub
 	}
 
