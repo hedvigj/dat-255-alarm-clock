@@ -6,4 +6,14 @@
     <string name="home">Hem</string>
     <string name="overview">Översikt</string>
     <string name="overview_screen">OverviewScreen</string>
+    <string name="monday">Måndag</string>
+    <string name="tuesday">Tisdag</string>
+    <string name="wednesday">Onsdag</string>
+    <string name="thursday">Torsdag</string>
+    <string name="friday">Fredag</string>
+    <string name="saturday">Lördag</string>
+    <string name="sunday">Söndag</string>
+    <string name="repeat">Repetera</string>
+    <string name="sleepwarning">Sömn varning</string>
+    <string name="finish">Klar</string>
 </resources>

@@ -4,14 +4,11 @@
   android:layout_width="match_parent"
   android:layout_height="match_parent">
   	<TimePicker 
-  		android:id="@+id/alarmtimepicker"
-  		android:layout_width="250dip"
-  		android:layout_height="150dip"
-  		android:layout_alignParentTop="true"
-  		android:layout_centerInParent="true"
-  		android:layout_marginTop="30dip"
-  		/>
-   
+  	android:layout_height="150dip" 
+  	android:id="@+id/alarmtimepicker" 
+  	android:layout_width="250dip" 
+  	android:layout_above="@+id/wednesdayTextView" 
+  	android:layout_centerHorizontal="true"/>
   	<LinearLayout 
 		android:id="@+id/linearbottom"
 		android:orientation="horizontal"
@@ -35,6 +32,133 @@
 			android:layout_width="85dip"
 			android:text="@string/group"/>
 		</LinearLayout>
-  
-  
+  	<TextView 
+  		android:text="@string/wednesday"
+  		android:layout_height="wrap_content" 
+  		android:layout_width="wrap_content"
+  		android:id="@+id/wednesdayTextView" 
+  		android:textAppearance="?android:attr/textAppearanceSmall" 
+  		android:layout_above="@+id/wednesdayToggleButton" 
+  		android:layout_alignLeft="@+id/wednesdayToggleButton" 
+  		android:layout_alignRight="@+id/wednesdayToggleButton"/>
+  	<TextView 
+  		android:text="@string/thursday"
+  		android:layout_height="wrap_content" 
+  		android:layout_width="wrap_content" 
+  		android:id="@+id/thursdayTextView" 
+  		android:textAppearance="?android:attr/textAppearanceSmall" 
+  		android:layout_above="@+id/thursdayToggleButton" 
+  		android:layout_alignLeft="@+id/thursdayToggleButton" 
+  		android:layout_alignRight="@+id/thursdayToggleButton"/>
+  	<TextView 
+  		android:text="@string/tuesday"  
+  		android:layout_height="wrap_content" 
+  		android:layout_width="wrap_content" 
+  		android:id="@+id/tuesdayTextView" 
+  		android:textAppearance="?android:attr/textAppearanceSmall" 
+  		android:layout_above="@+id/tuesdayToggleButton"
+  		android:layout_alignLeft="@+id/tuesdayToggleButton" 
+  		android:layout_alignRight="@+id/tuesdayToggleButton"/>
+  	<TextView 
+  		android:text="@string/monday"
+  		android:layout_height="wrap_content" 
+  		android:layout_width="wrap_content" 
+  		android:id="@+id/mondayTextView" 
+  		android:textAppearance="?android:attr/textAppearanceSmall" 
+  		android:layout_above="@+id/mondayToggleButton" 
+  		android:layout_alignLeft="@+id/alarmtimepicker"/>
+  	<TextView 
+  		android:text="@string/saturday"
+  		android:textAppearance="?android:attr/textAppearanceSmall" 
+  		android:layout_height="wrap_content" 
+  		android:layout_width="wrap_content" 
+  		android:id="@+id/saturdayTextView"  
+  		android:layout_above="@+id/saturdayToggleButton"
+  		android:layout_alignLeft="@+id/saturdayToggleButton" 
+  		android:layout_alignRight="@+id/saturdayToggleButton"/>
+  	<TextView 
+  		android:text="@string/friday"
+  		android:textAppearance="?android:attr/textAppearanceSmall" 
+  		android:layout_height="wrap_content" 
+  		android:layout_width="wrap_content" 
+  		android:id="@+id/fridayTextView" 
+  		android:layout_above="@+id/fridayToggleButton"
+  		android:layout_alignLeft="@+id/mondayToggleButton" 
+  		android:layout_alignRight="@+id/mondayToggleButton"/>
+  	<TextView 
+  		android:text="@string/sunday"
+  		android:textAppearance="?android:attr/textAppearanceSmall" 
+  		android:layout_height="wrap_content" 
+  		android:layout_width="wrap_content" 
+  		android:id="@+id/sundayTextView" 
+  		android:layout_above="@+id/sundayToggleButton" 
+  		android:layout_toLeftOf="@+id/thursdayToggleButton" 
+  		android:layout_alignLeft="@+id/sundayToggleButton"/>
+  	<CheckBox 
+  		android:text="@string/repeat"
+  		android:id="@+id/repeatCheckBox" 
+  		android:layout_height="wrap_content" 
+  		android:layout_width="match_parent" 
+  		android:layout_above="@+id/finishButton" 
+  		android:layout_alignRight="@+id/alarmtimepicker" 
+  		android:layout_alignLeft="@+id/sleepwarningCheckBox"/>
+  	<CheckBox 
+  		android:text="@string/sleepwarning"
+  		android:id="@+id/sleepwarningCheckBox" 
+  		android:layout_height="wrap_content" 
+  		android:layout_width="wrap_content" 
+  		android:layout_above="@+id/repeatCheckBox" 
+  		android:layout_alignLeft="@+id/fridayToggleButton"/>
+  	<ToggleButton 
+  		android:layout_height="wrap_content" 
+  		android:layout_width="wrap_content" 
+  		android:id="@+id/fridayToggleButton" 
+  		android:layout_above="@+id/sleepwarningCheckBox" 
+  		android:layout_alignLeft="@+id/fridayTextView"/>
+  	<ToggleButton 
+  		android:layout_height="wrap_content" 
+  		android:layout_width="wrap_content" 
+  		android:id="@+id/saturdayToggleButton" 
+  		android:layout_alignTop="@+id/fridayToggleButton" 
+  		android:layout_toRightOf="@+id/fridayToggleButton"/>
+  	<ToggleButton 
+  		android:layout_height="wrap_content" 
+  		android:layout_width="wrap_content" 
+  		android:id="@+id/sundayToggleButton" 
+  		android:layout_above="@+id/sleepwarningCheckBox" 
+  		android:layout_toRightOf="@+id/saturdayToggleButton"/>
+  	<ToggleButton 
+  		android:layout_height="wrap_content" 
+  		android:layout_width="wrap_content"  
+  		android:id="@+id/mondayToggleButton" 
+  		android:layout_above="@+id/fridayTextView" 
+  		android:layout_alignLeft="@+id/mondayTextView"/>
+  	<ToggleButton 
+  		android:layout_height="wrap_content" 
+  		android:layout_width="wrap_content"  
+  		android:id="@+id/tuesdayToggleButton" 
+  		android:layout_alignTop="@+id/mondayToggleButton" 
+  		android:layout_toRightOf="@+id/fridayToggleButton"/>
+  	<ToggleButton 
+  		android:layout_height="wrap_content" 
+  		android:layout_width="wrap_content" 
+  		android:id="@+id/wednesdayToggleButton" 
+  		android:layout_alignBottom="@+id/tuesdayToggleButton" 
+  		android:layout_alignLeft="@+id/sundayToggleButton"/>
+  	<ToggleButton 
+  		android:layout_height="wrap_content" 
+  		android:layout_width="wrap_content" 
+  		android:id="@+id/thursdayToggleButton" 
+  		android:layout_alignTop="@+id/wednesdayToggleButton" 
+  		android:layout_toRightOf="@+id/wednesdayToggleButton"/>
+  	<Button 
+  		android:layout_width="wrap_content" 
+  		android:text="@string/finish" 
+  		android:layout_height="wrap_content" 
+  		android:id="@+id/finishButton" 
+  		android:layout_above="@+id/linearbottom" 
+  		android:layout_alignLeft="@+id/alarmtimepicker" 
+  		android:layout_alignRight="@+id/alarmtimepicker"/>
 </RelativeLayout>
+
+
