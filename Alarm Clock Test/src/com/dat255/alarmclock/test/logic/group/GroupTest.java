@@ -23,6 +23,18 @@ public class GroupTest extends AndroidTestCase {
 			return 0;
 		}
 
+		@Override
+		public long getId() {
+			// TODO Auto-generated method stub
+			return 0;
+		}
+
+		@Override
+		public void setTriggerTime(long triggerTime) {
+			// TODO Auto-generated method stub
+
+		}
+
 	}
 
 	@Override
