@@ -1,5 +1,7 @@
 package com.dat255.alarmclock.logic.alarm;
 
+import android.content.Context;
+
 public interface IAlarm {
 
 	/**
@@ -21,5 +23,13 @@ public interface IAlarm {
 	 *            the time in milliseconds
 	 */
 	public void setTriggerTime(long triggerTime);
+
+	/**
+	 * Occurs when the alarm is triggered
+	 * 
+	 * @param context
+	 *            the context in which the alarm is triggered
+	 */
+	public void onAlarmTriggered(Context context);
 
 }

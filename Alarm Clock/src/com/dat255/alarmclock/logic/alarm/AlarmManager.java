@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
+import android.app.Activity;
 import android.content.Context;
 
 /**
@@ -53,10 +54,12 @@ public class AlarmManager {
 	 * 
 	 * @param appContext
 	 *            the Android application context
+	 * @param action
+	 *            the activity class to open when the alarm is triggered
 	 * @return a reference to the newly created alarm
 	 */
-	public IAlarm createAlarm(Context appContext) {
-		IAlarm alarm = AlarmFactory.get(appContext, getUniqueId());
+	public IAlarm createAlarm(Context appContext, Class<? extends Activity> action) {
+		IAlarm alarm = AlarmFactory.get(appContext, action, getUniqueId());
 
 		map.put(alarm.getId(), alarm);
 

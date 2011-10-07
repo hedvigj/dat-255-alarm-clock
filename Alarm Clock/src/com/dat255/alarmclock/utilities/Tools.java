@@ -1,5 +1,6 @@
 package com.dat255.alarmclock.utilities;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.view.View;
@@ -18,7 +19,7 @@ public class Tools {
 	 * @param nextActivityClass
 	 *            the class of the Activity to launch upon click
 	 */
-	public static void createOnClickLauncher(View view, final Context context, final Class nextActivityClass) {
+	public static void createOnClickLauncher(View view, final Context context, final Class<? extends Activity> nextActivityClass) {
 
 		view.setOnClickListener(new OnClickListener() {
 			@Override

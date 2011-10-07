@@ -1,5 +1,7 @@
 package com.dat255.alarmclock.logic.alarm.properties;
 
+import android.content.Context;
+
 import com.dat255.alarmclock.logic.alarm.IAlarm;
 
 public class TextAlarmProperty implements IAlarmProperty {
@@ -16,7 +18,7 @@ public class TextAlarmProperty implements IAlarmProperty {
 	}
 
 	@Override
-	public void onAlarmTriggered() {
+	public void onAlarmTriggered(Context context) {
 		// TODO Auto-generated method stub
 	}
 

@@ -1,5 +1,7 @@
 package com.dat255.alarmclock.logic.alarm.properties;
 
+import android.content.Context;
+
 import com.dat255.alarmclock.logic.alarm.IAlarm;
 
 public interface IAlarmProperty {
@@ -14,7 +16,10 @@ public interface IAlarmProperty {
 
 	/**
 	 * Occurs when the parent alarm is triggered
+	 * 
+	 * @param context
+	 *            the context in which the alarm is triggered
 	 */
-	public void onAlarmTriggered();
+	public void onAlarmTriggered(Context context);
 
 }
