@@ -19,31 +19,32 @@
         <activity android:name=".view.OverviewActivity"
         		  android:label="@string/overview">
         		<intent-filter>
-        			<action android:name="android.intent.action.OVERVIEWSCREEN" />
-	        		<category android:name="andorid.intent.category.LAUNCHER"/>
+        			<action android:name="android.intent.action.VIEW" />
+	        		<category android:name="andorid.intent.category.DEFAULT"/>
         		</intent-filter>
         </activity>
         
 		<activity android:name=".view.AlarmActivity"
 				  android:label="@string/alarm">
         		<intent-filter>
-	        		<action android:name="android.intent.action.ALARMSCREEN" />
-	        		<category android:name="andorid.intent.category.LAUNCHER"/>
+	        		<action android:name="android.intent.action.VIEW" />
+	        		<category android:name="andorid.intent.category.DEFAULT"/>
         		</intent-filter>
         </activity>
         
         <activity android:name=".view.GroupActivity"
         		  android:label="@string/group">
         		<intent-filter>
-	        		<action android:name="android.intent.action.GROUPSCREEN" />
-	        		<category android:name="andorid.intent.category.LAUNCHER"/>
+	        		<action android:name="android.intent.action.VIEW" />
+	        		<category android:name="andorid.intent.category.DEFAULT"/>
         		</intent-filter>
         </activity>
+        
         <activity android:name=".view.TriggerActivity"
         		  android:label="@string/app_name">
         		<intent-filter>
-	        		<action android:name="android.intent.action.TRIGGERSCREEN" />
-	        		<category android:name="andorid.intent.category.LAUNCHER"/>
+	        		<action android:name="android.intent.action.VIEW" />
+	        		<category android:name="andorid.intent.category.DEFAULT"/>
         		</intent-filter>
         </activity>
     </application>

@@ -37,15 +37,19 @@ public class AlarmManager {
 		// Return an id that does not currently exist in the map
 		Collection<Long> keys = map.keySet();
 
-		Long max = Collections.max(keys);
+		if (!keys.isEmpty()) {
+			Long max = Collections.max(keys);
 
-		for (long i = 0; i < max; i++) {
-			if (!keys.contains(i)) {
-				return i;
+			for (long i = 0; i <= max; i++) {
+				if (!keys.contains(i)) {
+					return i;
+				}
 			}
+
+			return max + 1;
 		}
 
-		return max + 1;
+		return 0;
 	}
 
 	/**
@@ -72,7 +76,9 @@ public class AlarmManager {
 	 * @param alarm
 	 */
 	public void removeAlarm(IAlarm alarm) {
-		map.remove(alarm.getId());
+		if (alarm != null) {
+			map.remove(alarm.getId());
+		}
 	}
 
 	/**

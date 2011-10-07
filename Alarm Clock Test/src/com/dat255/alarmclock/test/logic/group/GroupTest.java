@@ -2,6 +2,7 @@ package com.dat255.alarmclock.test.logic.group;
 
 import java.util.List;
 
+import android.content.Context;
 import android.test.AndroidTestCase;
 
 import com.dat255.alarmclock.logic.alarm.IAlarm;
@@ -12,9 +13,6 @@ public class GroupTest extends AndroidTestCase {
 
 	/**
 	 * Private class with no functionality to use in the group
-	 * 
-	 * @author Sickan
-	 * 
 	 */
 	private class TestAlarm implements IAlarm {
 		@Override
@@ -31,6 +29,30 @@ public class GroupTest extends AndroidTestCase {
 
 		@Override
 		public void setTriggerTime(long triggerTime) {
+			// TODO Auto-generated method stub
+
+		}
+
+		@Override
+		public void enable() {
+			// TODO Auto-generated method stub
+
+		}
+
+		@Override
+		public void disable() {
+			// TODO Auto-generated method stub
+
+		}
+
+		@Override
+		public boolean isEnabled() {
+			// TODO Auto-generated method stub
+			return false;
+		}
+
+		@Override
+		public void onAlarmTriggered(Context context) {
 			// TODO Auto-generated method stub
 
 		}

@@ -51,7 +51,7 @@ public class Alarm implements IAlarm {
 
 		intent.putExtra("alarmid", id);
 
-		pendingIntent = PendingIntent.getBroadcast(appContext, 0, intent, 0);
+		pendingIntent = PendingIntent.getActivity(appContext, 0, intent, Intent.FLAG_ACTIVITY_NEW_TASK);
 	}
 
 	/**
@@ -74,7 +74,7 @@ public class Alarm implements IAlarm {
 			// Enable
 			updateAlarmProperties();
 
-			android.app.AlarmManager manager = (android.app.AlarmManager) appContext.getSystemService(appContext.ALARM_SERVICE);
+			android.app.AlarmManager manager = (android.app.AlarmManager) appContext.getSystemService(Context.ALARM_SERVICE);
 
 			manager.set(android.app.AlarmManager.RTC_WAKEUP, triggerTime, pendingIntent);
 
@@ -89,7 +89,7 @@ public class Alarm implements IAlarm {
 	public void disable() {
 		if (enabled) {
 			// Disable
-			android.app.AlarmManager manager = (android.app.AlarmManager) appContext.getSystemService(appContext.ALARM_SERVICE);
+			android.app.AlarmManager manager = (android.app.AlarmManager) appContext.getSystemService(Context.ALARM_SERVICE);
 
 			manager.cancel(pendingIntent);
 
@@ -155,6 +155,8 @@ public class Alarm implements IAlarm {
 		for (IAlarmProperty property : properties) {
 			property.onAlarmTriggered(context);
 		}
+
+		disable();
 	}
 
 	/**

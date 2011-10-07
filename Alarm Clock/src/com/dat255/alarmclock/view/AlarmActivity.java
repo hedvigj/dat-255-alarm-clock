@@ -1,8 +1,11 @@
 package com.dat255.alarmclock.view;
 
+import java.util.Calendar;
+
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
@@ -10,13 +13,14 @@ import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.LinearLayout;
 import android.widget.TimePicker;
 import android.widget.TimePicker.OnTimeChangedListener;
+import android.widget.Toast;
 
 import com.dat255.alarmclock.R;
+import com.dat255.alarmclock.logic.alarm.AlarmManager;
+import com.dat255.alarmclock.logic.alarm.IAlarm;
 import com.dat255.alarmclock.utilities.Tools;
 
 public class AlarmActivity extends Activity {
-	private Button button;
-	private TimePicker timePicker;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -83,21 +87,43 @@ public class AlarmActivity extends Activity {
 
 		}
 
-		button = (Button) findViewById(R.id.homeButton);
-		Tools.createOnClickLauncher(button, AlarmActivity.this, HomeActivity.class);
+		Button homeButton = (Button) findViewById(R.id.homeButton);
+		Tools.createOnClickLauncher(homeButton, AlarmActivity.this, HomeActivity.class);
 
-		button = (Button) findViewById(R.id.overviewButton);
-		Tools.createOnClickLauncher(button, AlarmActivity.this, OverviewActivity.class);
+		Button overviewButton = (Button) findViewById(R.id.overviewButton);
+		Tools.createOnClickLauncher(overviewButton, AlarmActivity.this, OverviewActivity.class);
 
-		button = (Button) findViewById(R.id.groupButton);
-		Tools.createOnClickLauncher(button, AlarmActivity.this, GroupActivity.class);
+		Button groupButton = (Button) findViewById(R.id.groupButton);
+		Tools.createOnClickLauncher(groupButton, AlarmActivity.this, GroupActivity.class);
 
-		timePicker = (TimePicker) findViewById(R.id.alarmtimepicker);
+		TimePicker timePicker = (TimePicker) findViewById(R.id.alarmtimepicker);
 
 		timePicker.setOnTimeChangedListener(new OnTimeChangedListener() {
 			@Override
 			public void onTimeChanged(TimePicker view, int hourOfDay, int minute) {
 			}
+		});
+
+		// Handle finish action
+		Button finishButton = (Button) findViewById(R.id.finishButton);
+
+		finishButton.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				// Just initialize a test alarm for now
+				Toast.makeText(v.getContext(), "Alarm created, should sound in 5 seconds", Toast.LENGTH_SHORT).show();
+
+				IAlarm alarm = AlarmManager.getInstance().createAlarm(getApplicationContext(), TriggerActivity.class);
+
+				Calendar c = Calendar.getInstance();
+				c.add(Calendar.SECOND, 5);
+
+				alarm.setTriggerTime(c.getTimeInMillis());
+
+				alarm.enable();
+			}
+
 		});
 
 	}
