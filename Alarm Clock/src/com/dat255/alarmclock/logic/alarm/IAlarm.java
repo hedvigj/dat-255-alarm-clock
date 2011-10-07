@@ -25,6 +25,21 @@ public interface IAlarm {
 	public void setTriggerTime(long triggerTime);
 
 	/**
+	 * Enables the alarm
+	 */
+	public void enable();
+
+	/**
+	 * Disables the alarm
+	 */
+	public void disable();
+
+	/**
+	 * @return true if the alarm is enabled, otherwise false
+	 */
+	public boolean isEnabled();
+
+	/**
 	 * Occurs when the alarm is triggered
 	 * 
 	 * @param context

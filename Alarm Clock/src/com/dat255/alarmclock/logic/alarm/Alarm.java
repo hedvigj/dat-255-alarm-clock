@@ -68,6 +68,7 @@ public class Alarm implements IAlarm {
 	/**
 	 * Enables the alarm
 	 */
+	@Override
 	public void enable() {
 		if (!enabled) {
 			// Enable
@@ -84,6 +85,7 @@ public class Alarm implements IAlarm {
 	/**
 	 * Disables the alarm
 	 */
+	@Override
 	public void disable() {
 		if (enabled) {
 			// Disable
@@ -98,6 +100,7 @@ public class Alarm implements IAlarm {
 	/**
 	 * @return true if the alarm is enabled, otherwise false
 	 */
+	@Override
 	public boolean isEnabled() {
 		return enabled;
 	}
