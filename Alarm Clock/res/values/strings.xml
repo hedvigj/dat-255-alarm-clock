@@ -17,4 +17,6 @@
     <string name="thursday">Torsdag</string>
     <string name="tuesday">Tisdag</string>
     <string name="wednesday">Onsdag</string>
+    <string name="snooze">Snooze</string>
+    <string name="ignore">Ignore</string>
 </resources>

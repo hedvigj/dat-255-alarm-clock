@@ -1,6 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<RelativeLayout
   xmlns:android="http://schemas.android.com/apk/res/android"
   android:layout_width="match_parent"
   android:layout_height="match_parent">
-</LinearLayout>
+    <TextView 
+  		android:id="@+id/snoozeView" 
+    	android:text="@string/alarm"
+    	android:layout_width="wrap_content" 
+    	android:layout_height="wrap_content" 
+    	android:textAppearance="?android:attr/textAppearanceLarge" 
+    	android:layout_alignParentTop="true" 
+    	android:layout_centerHorizontal="true" 
+    	android:layout_marginTop="178dp"/>
+    <Button 
+    	android:text="@string/snooze"
+    	android:id="@+id/snoozeButton" 
+    	android:layout_width="wrap_content" 
+    	android:layout_height="wrap_content"     	
+    	android:layout_alignParentBottom="true" 
+    	android:layout_alignParentRight="true" 
+    	android:layout_toRightOf="@+id/snoozeView"/>
+    <Button 
+    	android:text="@string/ignore"
+    	android:id="@+id/ignoreButton"
+    	android:layout_width="wrap_content" 
+    	android:layout_height="wrap_content" 
+    	android:layout_alignParentBottom="true" 
+    	android:layout_alignParentLeft="true" 
+    	android:layout_toLeftOf="@+id/snoozeView"/>
+  </RelativeLayout>
+  
+
+
+
