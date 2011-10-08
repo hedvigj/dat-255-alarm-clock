@@ -47,8 +47,10 @@ public class TriggerActivity extends Activity implements OnClickListener {
 	@Override
 	public void onResume() {
 		super.onResume();
-		// Start alarm sound
-		Sound.soundStart(this);
+		// Start alarm sound if not already started
+		if (Sound.isSoundOn() == false) {
+			Sound.soundStart(this);
+		}
 
 		// Get the id of the alarm that triggered this screen
 		alarmId = getIntent().getLongExtra("alarmid", 0);

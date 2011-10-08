@@ -8,10 +8,13 @@ import com.dat255.alarmclock.R;
 public class Sound {
 
 	private static MediaPlayer player = null;
+	private static boolean soundOn = false;
 
 	public static void soundStart(Context context) {
+		soundStop(context);
 		player = MediaPlayer.create(context, R.raw.test);
 		player.start();
+		soundOn = true;
 	}
 
 	public static void soundStop(Context context) {
@@ -20,5 +23,10 @@ public class Sound {
 			player.release();
 			player = null;
 		}
+		soundOn = false;
+	}
+
+	public static boolean isSoundOn() {
+		return soundOn;
 	}
 }
