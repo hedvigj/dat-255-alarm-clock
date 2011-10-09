@@ -21,16 +21,6 @@
 			android:layout_height="wrap_content" 
 			android:layout_width="85dip"
 			android:text="@string/overview"/>
-		<Button 
-			android:id="@+id/alarmButton" 
-			android:layout_height="wrap_content" 
-			android:layout_width="85dip"
-			android:text="@string/alarm"/>
-		<Button 
-			android:id="@+id/groupButton" 
-			android:layout_height="wrap_content" 
-			android:layout_width="85dip"
-			android:text="@string/group"/>
 		
 	</LinearLayout>
 </RelativeLayout>

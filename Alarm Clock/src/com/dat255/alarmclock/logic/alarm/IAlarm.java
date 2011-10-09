@@ -2,12 +2,9 @@ package com.dat255.alarmclock.logic.alarm;
 
 import android.content.Context;
 
-public interface IAlarm {
+import com.dat255.alarmclock.logic.common.IEntity;
 
-	/**
-	 * @return the id of this alarm
-	 */
-	public long getId();
+public interface IAlarm extends IEntity {
 
 	/**
 	 * Gets the time when the alarm will be triggered
@@ -23,6 +20,21 @@ public interface IAlarm {
 	 *            the time in milliseconds
 	 */
 	public void setTriggerTime(long triggerTime);
+
+	/**
+	 * Gets whether or not this alarm is visible to the user
+	 * 
+	 * @return true if visible, otherwise false
+	 */
+	public boolean getVisible();
+
+	/**
+	 * Sets whether or not this alarm is visible to the user
+	 * 
+	 * @param visible
+	 *            true if visible, otherwise false
+	 */
+	public void setVisible(boolean visible);
 
 	/**
 	 * Enables the alarm
@@ -46,5 +58,16 @@ public interface IAlarm {
 	 *            the context in which the alarm is triggered
 	 */
 	public void onAlarmTriggered(Context context);
+
+	/**
+	 * Sets the trigger time of the alarm a number of minutes into the future.
+	 * Remember that this call changes the trigger time of the alarm and thus
+	 * should not be used when the user expects his/her input time to apply.
+	 * Instead, create a new alarm and call this method on the new instance.
+	 * 
+	 * @param minutes
+	 *            the number of minutes to snooze
+	 */
+	public void snooze(int minutes);
 
 }

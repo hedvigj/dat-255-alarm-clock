@@ -1,5 +1,7 @@
 package com.dat255.alarmclock.logic.alarm;
 
+import java.util.Calendar;
+
 import android.app.Activity;
 import android.app.PendingIntent;
 import android.content.Context;
@@ -17,6 +19,8 @@ public class Alarm implements IAlarm {
 	private long id;
 
 	private boolean enabled;
+
+	private boolean visible;
 
 	private long triggerTime;
 
@@ -38,6 +42,7 @@ public class Alarm implements IAlarm {
 		this.appContext = appContext;
 		this.id = id;
 		this.enabled = false;
+		this.visible = true;
 		this.triggerTime = 0;
 
 		this.initializeIntent(action);
@@ -145,6 +150,27 @@ public class Alarm implements IAlarm {
 	}
 
 	/**
+	 * Gets whether or not this alarm is visible to the user
+	 * 
+	 * @return true if visible, otherwise false
+	 */
+	@Override
+	public boolean getVisible() {
+		return visible;
+	}
+
+	/**
+	 * Sets whether or not this alarm is visible to the user
+	 * 
+	 * @param visible
+	 *            true if visible, otherwise false
+	 */
+	@Override
+	public void setVisible(boolean visible) {
+		this.visible = visible;
+	}
+
+	/**
 	 * Occurs when the alarm is triggered
 	 * 
 	 * @param context
@@ -167,5 +193,26 @@ public class Alarm implements IAlarm {
 	 */
 	public void setProperties(IAlarmProperty[] properties) {
 		this.properties = properties;
+	}
+
+	/**
+	 * Sets the trigger time of the alarm a number of minutes into the future.
+	 * Remember that this call changes the trigger time of the alarm and thus
+	 * should not be used when the user expects his/her input time to apply.
+	 * Instead, create a new alarm and call this method on the new instance.
+	 * 
+	 * @param minutes
+	 *            the number of minutes to snooze
+	 */
+	@Override
+	public void snooze(int minutes) {
+		// Get current time
+		Calendar current = Calendar.getInstance();
+
+		// Add the number of snooze minutes, allow no negative values
+		current.add(Calendar.MINUTE, Math.abs(minutes));
+
+		// Set the alarm trigger time
+		setTriggerTime(current.getTimeInMillis());
 	}
 }

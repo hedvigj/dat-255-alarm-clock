@@ -104,7 +104,7 @@ public class AlarmActivity extends Activity {
 			}
 		});
 
-		// Handle finish action
+		// Handle finish button action
 		Button finishButton = (Button) findViewById(R.id.finishButton);
 
 		finishButton.setOnClickListener(new OnClickListener() {

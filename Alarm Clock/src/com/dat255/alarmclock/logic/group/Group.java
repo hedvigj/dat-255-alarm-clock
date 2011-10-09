@@ -6,31 +6,40 @@ import java.util.List;
 import com.dat255.alarmclock.logic.alarm.IAlarm;
 
 public class Group implements IGroup {
-	private String groupName;
-	private final List<IAlarm> alarms;
 
-	public Group(String groupName) {
-		setName(groupName);
-		alarms = new ArrayList<IAlarm>();
+	private long id;
+
+	private String name;
+
+	private final List<IAlarm> alarms = new ArrayList<IAlarm>();
+
+	public Group(long id) {
+		this.id = id;
+	}
+
+	@Override
+	public long getId() {
+		return id;
 	}
 
 	@Override
 	public String getName() {
-		return groupName;
+		return name;
 	}
 
 	@Override
-	public void setName(String groupName) {
-		this.groupName = groupName;
-
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	@Override
 	public List<IAlarm> getAlarms() {
 		List<IAlarm> alarmsClone = new ArrayList<IAlarm>();
+
 		for (IAlarm a : alarms) {
 			alarmsClone.add(a);
 		}
+
 		return alarmsClone;
 	}
 

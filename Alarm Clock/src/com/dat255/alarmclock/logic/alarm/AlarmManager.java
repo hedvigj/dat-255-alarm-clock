@@ -1,12 +1,14 @@
 package com.dat255.alarmclock.logic.alarm;
 
-import java.util.Collection;
-import java.util.Collections;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import android.app.Activity;
 import android.content.Context;
+
+import com.dat255.alarmclock.utilities.Tools;
 
 /**
  * The alarm manager class handles all existing alarms
@@ -16,6 +18,9 @@ public class AlarmManager {
 	private static AlarmManager instance;
 
 	private final Map<Long, IAlarm> map = new HashMap<Long, IAlarm>();
+
+	private AlarmManager() {
+	}
 
 	/**
 	 * @return the single instance of the alarm manager
@@ -29,30 +34,6 @@ public class AlarmManager {
 	}
 
 	/**
-	 * @return a unique alarm id
-	 */
-	private long getUniqueId() {
-		// Bad performance here!
-
-		// Return an id that does not currently exist in the map
-		Collection<Long> keys = map.keySet();
-
-		if (!keys.isEmpty()) {
-			Long max = Collections.max(keys);
-
-			for (long i = 0; i <= max; i++) {
-				if (!keys.contains(i)) {
-					return i;
-				}
-			}
-
-			return max + 1;
-		}
-
-		return 0;
-	}
-
-	/**
 	 * Creates a new alarm. Always use this method for instantiating alarm
 	 * objects.
 	 * 
@@ -63,7 +44,7 @@ public class AlarmManager {
 	 * @return a reference to the newly created alarm
 	 */
 	public IAlarm createAlarm(Context appContext, Class<? extends Activity> action) {
-		IAlarm alarm = AlarmFactory.get(appContext, action, getUniqueId());
+		IAlarm alarm = AlarmFactory.get(appContext, action, Tools.getUniqueMapId(map));
 
 		map.put(alarm.getId(), alarm);
 
@@ -74,6 +55,7 @@ public class AlarmManager {
 	 * Removes a specific alarm and frees up the corresponding alarm id
 	 * 
 	 * @param alarm
+	 *            the alarm to be removed
 	 */
 	public void removeAlarm(IAlarm alarm) {
 		if (alarm != null) {
@@ -90,5 +72,15 @@ public class AlarmManager {
 	 */
 	public IAlarm findAlarmById(long id) {
 		return map.get(id);
+	}
+
+	public List<IAlarm> getAlarms() {
+		List<IAlarm> alarms = new ArrayList<IAlarm>();
+
+		for (IAlarm alarm : map.values()) {
+			alarms.add(alarm);
+		}
+
+		return alarms;
 	}
 }

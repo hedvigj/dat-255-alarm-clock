@@ -3,8 +3,9 @@ package com.dat255.alarmclock.logic.group;
 import java.util.List;
 
 import com.dat255.alarmclock.logic.alarm.IAlarm;
+import com.dat255.alarmclock.logic.common.IEntity;
 
-public interface IGroup {
+public interface IGroup extends IEntity {
 
 	/**
 	 * Get the name of the group

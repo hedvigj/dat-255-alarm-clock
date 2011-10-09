@@ -27,7 +27,9 @@ public class TriggerActivity extends Activity implements OnClickListener {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+
 		setContentView(R.layout.triggerscreen);
+
 		snoozeButton = (Button) findViewById(R.id.snoozeButton);
 		snoozeButton.setOnClickListener(this);
 		ignoreButton = (Button) findViewById(R.id.ignoreButton);
