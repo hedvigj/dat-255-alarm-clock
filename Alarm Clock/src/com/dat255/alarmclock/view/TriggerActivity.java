@@ -2,6 +2,7 @@ package com.dat255.alarmclock.view;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.PowerManager;
 import android.os.PowerManager.WakeLock;
@@ -14,7 +15,6 @@ import com.dat255.alarmclock.R;
 import com.dat255.alarmclock.logic.alarm.AlarmManager;
 import com.dat255.alarmclock.logic.alarm.IAlarm;
 import com.dat255.alarmclock.utilities.Sound;
-import com.dat255.alarmclock.utilities.Tools;
 
 public class TriggerActivity extends Activity implements OnClickListener {
 	private PowerManager powerManager;
@@ -77,13 +77,14 @@ public class TriggerActivity extends Activity implements OnClickListener {
 		switch (view.getId()) {
 		case R.id.snoozeButton:
 			Sound.soundStop(this);
-			Toast.makeText(this, "Alarm will ring again in 5 min", Toast.LENGTH_LONG).show();
-			alarm.disable();
+			Toast.makeText(this, "Alarm will ring again in 1 min", Toast.LENGTH_LONG).show();
+			alarm.snooze(1);
 			break;
 		case R.id.ignoreButton:
+			alarm.disable();
 			Sound.soundStop(this);
-
-			Tools.createOnClickLauncher(ignoreButton, TriggerActivity.this, HomeActivity.class);
+			Intent i = new Intent(this, HomeActivity.class);
+			startActivity(i);
 		}
 
 	}

@@ -6,6 +6,9 @@ import android.app.ListActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -36,6 +39,30 @@ public class OverviewActivity extends ListActivity {
 		 * Tools.createOnClickLauncher(button, OverviewActivity.this,
 		 * GroupActivity.class);
 		 */
+	}
+
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		MenuInflater inflater = getMenuInflater();
+		inflater.inflate(R.menu.overviewmenu, menu);
+		return true;
+	}
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		Intent i;
+		switch (item.getItemId()) {
+		case R.id.createalarm:
+			i = new Intent(this, AlarmActivity.class);
+			startActivity(i);
+			return true;
+		case R.id.creategroup:
+			i = new Intent(this, GroupActivity.class);
+			startActivity(i);
+			return true;
+		default:
+			return super.onOptionsItemSelected(item);
+		}
 	}
 
 	@Override

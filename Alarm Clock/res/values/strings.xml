@@ -19,4 +19,7 @@
     <string name="wednesday">Onsdag</string>
     <string name="snooze">Snooze</string>
     <string name="ignore">Ignore</string>
+    <string name="createalarm">Skapa alarm</string>
+    <string name="creategroup">Skapa grupp</string>
+    <string name="delete">Radera</string>
 </resources>
