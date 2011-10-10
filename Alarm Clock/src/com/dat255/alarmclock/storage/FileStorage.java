@@ -1,11 +1,11 @@
 package com.dat255.alarmclock.storage;
 
-import java.io.FileInputStream;
+import java.io.EOFException;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.io.StreamCorruptedException;
 import java.util.ArrayList;
 import java.util.List;
@@ -13,7 +13,7 @@ import java.util.List;
 import android.content.Context;
 import android.util.Log;
 
-public class FileStorage<T> implements IStorage<T> {
+public class FileStorage<T extends Serializable> implements IStorage<T> {
 
 	private final Context context;
 
@@ -21,85 +21,78 @@ public class FileStorage<T> implements IStorage<T> {
 		this.context = context;
 	}
 
-	// SuppressWarning is for the unchecked conversion from Object to generic
-	// type T
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<T> readObjectsFromFile(String classTag) {
 		List<T> objList = new ArrayList<T>();
-		Object obj = null;
 
 		try {
 			// Open streams for writing
-			FileInputStream fis = context.openFileInput(classTag + "Object");
-			ObjectInputStream ois = new ObjectInputStream(fis);
+			ObjectInputStream ois = null;
 
-			// ois.readObject() can generate ClassNotFoundException
-			// Loop while there are more more objects in file and add them into
-			// the list
-			while ((obj = ois.readObject()) != null) {
-				objList.add((T) obj);
-			}
+			ois = new ObjectInputStream(context.openFileInput(classTag
+					+ "Object"));
+
+			// Test
+			objList = (List<T>) ois.readObject();
 
 			// Close the streams
 			ois.close();
-			fis.close();
 
+		} catch (EOFException e) {
+			Log.w("FileStorage",
+					"FileNotFoundException in FileStorage readObjectsToFile");
 		} catch (FileNotFoundException e) {
-			Log.e("FileStorage", "FileNotFoundException in FileStorage readObjectsToFile");
+			Log.e("FileStorage",
+					"FileNotFoundException in FileStorage readObjectsToFile");
 		} catch (StreamCorruptedException e) {
-			Log.e("FileStorage", "StreamCorruptedException in FileStorage readObjectsToFile");
-		} catch (IOException e) {
-			Log.e("FileStorage", "IOException in FileStorage readObjectsToFile");
+			Log.e("FileStorage",
+					"StreamCorruptedException in FileStorage readObjectsToFile");
 		} catch (ClassNotFoundException e) {
-			Log.e("FileStorage", "ClassNotFoundException in FileStorage readObjectsToFile");
+			Log.e("FileStorage",
+					"ClassNotFoundException in FileStorage readObjectsToFile");
+		} catch (IOException e) {
+			Log.e("FileStorage",
+					"IOException in FileStorage readObjectsToFile "
+							+ e.getLocalizedMessage());
 		}
 
 		return objList;
 	}
 
 	@Override
-	public void writeObjectsToFile(String classTag, List<T> objList) {
+	public boolean writeObjectsToFile(String classTag, List<T> objList) {
 		try {
 			// Open streams for writing
-			FileOutputStream fos = context.openFileOutput(classTag + "Object", Context.MODE_PRIVATE);
-			ObjectOutputStream oos = new ObjectOutputStream(fos);
+			ObjectOutputStream oos = new ObjectOutputStream(
+					context.openFileOutput(classTag + "Object",
+							Context.MODE_PRIVATE));
 
-			// Write all objects in the list to the file
-			for (T o : objList) {
-				oos.writeObject(o);
-			}
+			oos.writeObject(objList);
 
-			// Close the streams
+			oos.flush();
+
+			// Close the ObjectInputStream
 			oos.close();
-			fos.close();
 
 		} catch (FileNotFoundException e) {
-			Log.e("FileStorage", "FileNotFoundException in FileStorage writeObjectsToFile");
+			Log.e("FileStorage",
+					"FileNotFoundException in FileStorage writeObjectsToFile");
+			return false;
 		} catch (IOException e) {
-			Log.e("FileStorage", "IOException in FileStorage writeObjectsToFile");
+			Log.e("FileStorage",
+					"IOException in FileStorage writeObjectsToFile "
+							+ e.getMessage());
+			e.printStackTrace();
+			return false;
 		}
+		return true;
 	}
 
 	@Override
-	public void writeObjectToFile(String classTag, Object obj) {
-		try {
-			// Open streams for writing
-			FileOutputStream fos = context.openFileOutput(classTag + "Object", Context.MODE_PRIVATE);
-			ObjectOutputStream oos = new ObjectOutputStream(fos);
-
-			// Write
-			oos.writeObject(obj);
-
-			// Close the streams
-			oos.close();
-			fos.close();
-
-		} catch (FileNotFoundException e) {
-			Log.e("FileStorage", "FileNotFoundException in FileStorage writeObjectToFile");
-		} catch (IOException e) {
-			Log.e("FileStorage", "IOException in FileStorage writeObjectToFile");
-		}
+	public boolean writeObjectToFile(String classTag, T obj) {
+		List<T> list = new ArrayList<T>();
+		list.add(obj);
+		return writeObjectsToFile(classTag, list);
 	}
-
 }

@@ -9,7 +9,6 @@ public interface IStorage<T> {
 	 * @param fileName
 	 *            is the file which contains the Object
 	 * 
-	 * 
 	 * @return Objects in specific file
 	 */
 	public List<T> readObjectsFromFile(String classTag);
@@ -22,7 +21,7 @@ public interface IStorage<T> {
 	 * @param objList
 	 *            is the Objects to be written
 	 */
-	public void writeObjectsToFile(String classTag, List<T> objList);
+	public boolean writeObjectsToFile(String classTag, List<T> objList);
 
 	/**
 	 * Write Object to a specific file
@@ -32,5 +31,5 @@ public interface IStorage<T> {
 	 * @param obj
 	 *            is the Object to be written
 	 */
-	public void writeObjectToFile(String classTag, Object obj);
+	public boolean writeObjectToFile(String classTag, T obj);
 }

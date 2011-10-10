@@ -17,44 +17,46 @@ public class GroupTest extends AndroidTestCase {
 	private class TestAlarm implements IAlarm {
 		@Override
 		public long getTriggerTime() {
-			// TODO Auto-generated method stub
 			return 0;
 		}
 
 		@Override
 		public long getId() {
-			// TODO Auto-generated method stub
 			return 0;
 		}
 
 		@Override
 		public void setTriggerTime(long triggerTime) {
-			// TODO Auto-generated method stub
-
 		}
 
 		@Override
 		public void enable() {
-			// TODO Auto-generated method stub
-
 		}
 
 		@Override
 		public void disable() {
-			// TODO Auto-generated method stub
-
 		}
 
 		@Override
 		public boolean isEnabled() {
-			// TODO Auto-generated method stub
 			return false;
 		}
 
 		@Override
 		public void onAlarmTriggered(Context context) {
-			// TODO Auto-generated method stub
+		}
 
+		@Override
+		public boolean getVisible() {
+			return false;
+		}
+
+		@Override
+		public void setVisible(boolean visible) {
+		}
+
+		@Override
+		public void snooze(int minutes) {
 		}
 
 	}
@@ -63,15 +65,15 @@ public class GroupTest extends AndroidTestCase {
 	public void setUp() throws Exception {
 		super.setUp();
 
-		group = new Group("Test");
+		group = new Group(1);
 	}
 
 	public void testGroup() {
 		// Test that the constructor dont generate any Exceptions
 		@SuppressWarnings("unused")
-		Group g = new Group("Test");
-		g = new Group("");
-		g = new Group("едц?=/!\"");
+		Group g = new Group(2);
+		g = new Group(3);
+		g = new Group(4);
 	}
 
 	public void testSetName() {
@@ -116,7 +118,7 @@ public class GroupTest extends AndroidTestCase {
 	}
 
 	public void testGetAlarms() {
-		group = new Group("test");
+		group = new Group(5);
 		TestAlarm newAlarm = new TestAlarm();
 
 		List<IAlarm> list = group.getAlarms();
@@ -140,7 +142,7 @@ public class GroupTest extends AndroidTestCase {
 	}
 
 	public void testRemoveAlarm() {
-		group = new Group("test");
+		group = new Group(6);
 		TestAlarm newAlarm = new TestAlarm();
 		List<IAlarm> list = group.getAlarms();
 
