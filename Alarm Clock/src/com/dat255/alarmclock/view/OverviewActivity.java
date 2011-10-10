@@ -6,11 +6,14 @@ import android.app.ListActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.ContextMenu;
+import android.view.ContextMenu.ContextMenuInfo;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 
@@ -41,6 +44,7 @@ public class OverviewActivity extends ListActivity {
 		 */
 	}
 
+	// Shows a menu when menubutton is pushed
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		MenuInflater inflater = getMenuInflater();
@@ -65,10 +69,29 @@ public class OverviewActivity extends ListActivity {
 		}
 	}
 
+	// Shows a menu when an group/alarm in the list is pushed for a longer time
+	@Override
+	public void onCreateContextMenu(ContextMenu menu, View v, ContextMenuInfo menuInfo) {
+		super.onCreateContextMenu(menu, v, menuInfo);
+		MenuInflater inflater = getMenuInflater();
+		inflater.inflate(R.menu.deletemenu, menu);
+	}
+
+	@Override
+	public boolean onContextItemSelected(MenuItem item) {
+		AdapterContextMenuInfo info = (AdapterContextMenuInfo) item.getMenuInfo();
+		switch (item.getItemId()) {
+		case R.id.delete:
+			// TODO Implement delete
+			return true;
+		default:
+			return super.onContextItemSelected(item);
+		}
+	}
+
 	@Override
 	public void onStart() {
 		super.onStart();
-
 		final Context context = this;
 
 		// List all groups
@@ -81,6 +104,9 @@ public class OverviewActivity extends ListActivity {
 		}
 
 		setListAdapter(new ArrayAdapter<String>(context, R.layout.overviewscreen_list_item, names));
+
+		// Register the context menu
+		registerForContextMenu(getListView());
 
 		// Set onItemClickListener()
 		getListView().setOnItemClickListener(new OnItemClickListener() {
