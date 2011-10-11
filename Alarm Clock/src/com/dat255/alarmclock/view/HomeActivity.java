@@ -4,7 +4,6 @@ import java.util.Calendar;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.widget.AnalogClock;
 import android.widget.Button;
 
 import com.dat255.alarmclock.R;
@@ -23,9 +22,6 @@ public class HomeActivity extends Activity {
 		super.onCreate(savedInstanceState);
 
 		setContentView(R.layout.homescreen);
-
-		AnalogClock currentTime = (AnalogClock) findViewById(R.id.current_time);
-		Tools.createOnClickLauncher(currentTime, HomeActivity.this, AlarmActivity.class);
 
 		Button overviewButton = (Button) findViewById(R.id.overviewButton);
 		Tools.createOnClickLauncher(overviewButton, HomeActivity.this, OverviewActivity.class);
