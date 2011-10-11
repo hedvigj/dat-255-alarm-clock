@@ -17,6 +17,14 @@ public class Sound {
 		soundOn = true;
 	}
 
+	public static void soundLoopStart(Context context) {
+		soundStop(context);
+		player = MediaPlayer.create(context, R.raw.test);
+		player.setLooping(true);
+		player.start();
+		soundOn = true;
+	}
+
 	public static void soundStop(Context context) {
 		if (player != null) {
 			player.stop();
