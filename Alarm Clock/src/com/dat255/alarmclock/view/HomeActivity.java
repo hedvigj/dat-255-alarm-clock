@@ -41,7 +41,7 @@ public class HomeActivity extends Activity {
 
 			alarm.enable();
 
-			group.addAlarm(alarm);
+			group.addAlarmToGroup(alarm);
 		}
 
 		IGroup group2 = GroupManager.getInstance().createGroup();

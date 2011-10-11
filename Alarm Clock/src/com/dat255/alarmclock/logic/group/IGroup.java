@@ -8,38 +8,38 @@ import com.dat255.alarmclock.logic.common.IEntity;
 public interface IGroup extends IEntity {
 
 	/**
-	 * Get the name of the group
+	 * Gets the name of the group
 	 * 
-	 * @return group name
+	 * @return the name
 	 */
 	public String getName();
 
 	/**
-	 * Set the name of the group
+	 * Sets the name of the group
 	 * 
 	 * @param groupName
-	 *            is the new name of the groups
+	 *            the new name of the groups
 	 */
 	public void setName(String groupName);
 
 	/**
-	 * Get the alarms that the group contains
+	 * Gets the alarms of this group
 	 * 
-	 * @return alarms
+	 * @return alarms the alarms
 	 */
 	public List<IAlarm> getAlarms();
 
 	/**
-	 * Add a new alarm to the group
+	 * Adds a new alarm to the group
 	 */
-	public void addAlarm(IAlarm newAlarm);
+	public void addAlarmToGroup(IAlarm newAlarm);
 
 	/**
-	 * Remove alarm from group
+	 * Removes an alarm from the group
 	 * 
 	 * @param alarm
-	 *            is the alarm intended to be removed
+	 *            the alarm to be removed
 	 */
-	public void removeAlarm(IAlarm alarm);
+	public void removeAlarmFromGroup(IAlarm alarm);
 
 }

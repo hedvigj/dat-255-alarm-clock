@@ -17,34 +17,58 @@ public class Group implements IGroup {
 		this.id = id;
 	}
 
+	/**
+	 * Gets the id used to reference this entity
+	 * 
+	 * @return the id
+	 */
 	@Override
 	public long getId() {
 		return id;
 	}
 
+	/**
+	 * Gets the name of the group
+	 * 
+	 * @return the name
+	 */
 	@Override
 	public String getName() {
 		return name;
 	}
 
+	/**
+	 * Sets the name of the group
+	 * 
+	 * @param groupName
+	 *            the new name of the groups
+	 */
 	@Override
 	public void setName(String name) {
 		this.name = name;
 	}
 
+	/**
+	 * Gets the alarms of this group
+	 * 
+	 * @return alarms the alarms
+	 */
 	@Override
 	public List<IAlarm> getAlarms() {
-		List<IAlarm> alarmsClone = new ArrayList<IAlarm>();
+		List<IAlarm> output = new ArrayList<IAlarm>();
 
 		for (IAlarm a : alarms) {
-			alarmsClone.add(a);
+			output.add(a);
 		}
 
-		return alarmsClone;
+		return output;
 	}
 
+	/**
+	 * Adds a new alarm to the group
+	 */
 	@Override
-	public void addAlarm(IAlarm newAlarm) {
+	public void addAlarmToGroup(IAlarm newAlarm) {
 		if (newAlarm != null) {
 			if (!alarms.contains(newAlarm)) {
 				alarms.add(newAlarm);
@@ -52,11 +76,16 @@ public class Group implements IGroup {
 		}
 	}
 
+	/**
+	 * Removes an alarm from the group
+	 * 
+	 * @param alarm
+	 *            the alarm to be removed
+	 */
 	@Override
-	public void removeAlarm(IAlarm alarm) {
+	public void removeAlarmFromGroup(IAlarm alarm) {
 		if (alarm != null) {
 			alarms.remove(alarm);
 		}
 	}
-
 }

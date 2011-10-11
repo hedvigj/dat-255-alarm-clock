@@ -59,6 +59,8 @@ public class AlarmManager {
 	 */
 	public void removeAlarm(IAlarm alarm) {
 		if (alarm != null) {
+			alarm.disable();
+
 			map.remove(alarm.getId());
 		}
 	}
@@ -75,12 +77,12 @@ public class AlarmManager {
 	}
 
 	public List<IAlarm> getAlarms() {
-		List<IAlarm> alarms = new ArrayList<IAlarm>();
+		List<IAlarm> output = new ArrayList<IAlarm>();
 
 		for (IAlarm alarm : map.values()) {
-			alarms.add(alarm);
+			output.add(alarm);
 		}
 
-		return alarms;
+		return output;
 	}
 }

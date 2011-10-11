@@ -24,6 +24,46 @@ public class OverviewActivity extends ListActivity {
 
 	private List<IGroup> groups;
 
+	@Override
+	public void onStart() {
+		super.onStart();
+
+		fillListActivity();
+
+		// Register the context menu
+		registerForContextMenu(getListView());
+
+		// Set onItemClickListener()
+		final Context context = this;
+
+		getListView().setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+				// Open the group activity
+				Intent intent = new Intent(context, GroupActivity.class);
+
+				intent.putExtra("groupid", groups.get((int) id).getId());
+
+				context.startActivity(intent);
+			}
+		});
+	}
+
+	private void fillListActivity() {
+		// Display all groups in the list view
+		groups = GroupManager.getInstance().getGroups();
+
+		String[] names = new String[groups.size()];
+
+		for (int i = 0; i < groups.size(); i++) {
+			names[i] = groups.get(i).getName();
+		}
+
+		setListAdapter(new ArrayAdapter<String>(this, R.layout.overviewscreen_list_item, names));
+	}
+
 	/**
 	 * Set up the options menu
 	 */
@@ -34,6 +74,24 @@ public class OverviewActivity extends ListActivity {
 		inflater.inflate(R.menu.overviewmenu, menu);
 
 		return true;
+	}
+
+	/**
+	 * Handle options menu
+	 */
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		Intent intent;
+
+		switch (item.getItemId()) {
+		case R.id.creategroup:
+
+			// TODO Should ask the user for a name and then create the group
+
+			return true;
+		default:
+			return super.onOptionsItemSelected(item);
+		}
 	}
 
 	/**
@@ -48,72 +106,6 @@ public class OverviewActivity extends ListActivity {
 		inflater.inflate(R.menu.deletemenu, menu);
 	}
 
-	@Override
-	public void onStart() {
-		super.onStart();
-
-		fillListView();
-
-		// Register the context menu
-		registerForContextMenu(getListView());
-
-		// Set onItemClickListener()
-		final Context context = this;
-
-		getListView().setOnItemClickListener(new OnItemClickListener() {
-
-			@Override
-			public void onItemClick(AdapterView<?> parent, View view, int position, long index) {
-
-				// Open the group activity
-				Intent intent = new Intent(context, GroupActivity.class);
-
-				intent.putExtra("groupid", groups.get((int) index).getId());
-
-				context.startActivity(intent);
-			}
-		});
-	}
-
-	private void fillListView() {
-		// Display all groups in the list view
-		groups = GroupManager.getInstance().getGroups();
-
-		String[] names = new String[groups.size()];
-
-		for (int i = 0; i < groups.size(); i++) {
-			names[i] = groups.get(i).getName();
-		}
-
-		setListAdapter(new ArrayAdapter<String>(this, R.layout.overviewscreen_list_item, names));
-	}
-
-	/**
-	 * Handle options menu
-	 */
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		Intent intent;
-
-		switch (item.getItemId()) {
-		case R.id.createalarm:
-			intent = new Intent(this, AlarmActivity.class);
-
-			intent.putExtra("alarmedit", false);
-
-			startActivity(intent);
-
-			return true;
-		case R.id.creategroup:
-
-			// TODO Should ask the user for a name and then create the group
-
-			return true;
-		default:
-			return super.onOptionsItemSelected(item);
-		}
-	}
-
 	/**
 	 * Handle long-press context menu
 	 */
@@ -124,12 +116,12 @@ public class OverviewActivity extends ListActivity {
 		switch (item.getItemId()) {
 		case R.id.delete:
 
-			// Delete the selected group
+			// Delete the selected group and all of it's alarms
 			IGroup group = groups.get((int) info.id);
 
-			GroupManager.getInstance().removeGroup(group);
+			GroupManager.getInstance().removeGroupAndContent(group);
 
-			fillListView();
+			fillListActivity();
 
 			return true;
 		default:
