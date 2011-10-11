@@ -108,12 +108,12 @@ public class GroupTest extends AndroidTestCase {
 	public void testAddAlarm() {
 		// Adding an alarm should not generate any error at any time
 		TestAlarm newAlarm = new TestAlarm();
-		group.addAlarm(newAlarm);
-		group.addAlarm(newAlarm);
+		group.addAlarmToGroup(newAlarm);
+		group.addAlarmToGroup(newAlarm);
 
 		for (int i = 0; i < 100; i++) {
 			newAlarm = new TestAlarm();
-			group.addAlarm(newAlarm);
+			group.addAlarmToGroup(newAlarm);
 		}
 	}
 
@@ -124,17 +124,17 @@ public class GroupTest extends AndroidTestCase {
 		List<IAlarm> list = group.getAlarms();
 		assertEquals(list.size(), 0);
 
-		group.addAlarm(newAlarm);
+		group.addAlarmToGroup(newAlarm);
 		list = group.getAlarms();
 		assertEquals(list.size(), 1);
 
-		group.addAlarm(newAlarm);
+		group.addAlarmToGroup(newAlarm);
 		list = group.getAlarms();
 		assertEquals(list.size(), 1);
 
 		for (int i = 0; i < 100; i++) {
 			newAlarm = new TestAlarm();
-			group.addAlarm(newAlarm);
+			group.addAlarmToGroup(newAlarm);
 			list = group.getAlarms();
 			assertEquals(list.size(), i + 2);
 		}
@@ -150,65 +150,65 @@ public class GroupTest extends AndroidTestCase {
 		assertEquals(group.getAlarms().size(), 0);
 
 		// First remove should not do anything
-		group.removeAlarm(newAlarm);
+		group.removeAlarmFromGroup(newAlarm);
 		assertEquals(group.getAlarms().size(), 0);
 
 		// Add alarm
-		group.addAlarm(newAlarm);
+		group.addAlarmToGroup(newAlarm);
 		assertEquals(group.getAlarms().size(), 1);
 
 		// Remove it again
-		group.removeAlarm(newAlarm);
+		group.removeAlarmFromGroup(newAlarm);
 		assertEquals(group.getAlarms().size(), 0);
 
 		// Add alarm
-		group.addAlarm(newAlarm);
+		group.addAlarmToGroup(newAlarm);
 		assertEquals(group.getAlarms().size(), 1);
 
 		// Add another alarm
 		newAlarm = new TestAlarm();
-		group.addAlarm(newAlarm);
+		group.addAlarmToGroup(newAlarm);
 		assertEquals(group.getAlarms().size(), 2);
 
 		// Remove one of the alarm
-		group.removeAlarm(newAlarm);
+		group.removeAlarmFromGroup(newAlarm);
 		assertEquals(group.getAlarms().size(), 1);
 
 		// Remove the last IAlarm item
 		list = group.getAlarms();
-		group.removeAlarm(list.get(0));
+		group.removeAlarmFromGroup(list.get(0));
 		assertEquals(group.getAlarms().size(), 0);
 
 		// Add an alarm to be remove after a while
 		TestAlarm test = new TestAlarm();
-		group.addAlarm(test);
+		group.addAlarmToGroup(test);
 		assertEquals(group.getAlarms().size(), 1);
 
 		for (int i = 1; i < 100; i++) {
 			// Add a new alarm
 			newAlarm = new TestAlarm();
-			group.addAlarm(newAlarm);
+			group.addAlarmToGroup(newAlarm);
 			assertEquals(group.getAlarms().size(), i + 1);
 
 			// Add another alarm
 			newAlarm = new TestAlarm();
-			group.addAlarm(newAlarm);
+			group.addAlarmToGroup(newAlarm);
 			assertEquals(group.getAlarms().size(), i + 2);
 
 			// Remove the last alarm
-			group.removeAlarm(newAlarm);
+			group.removeAlarmFromGroup(newAlarm);
 			assertEquals(group.getAlarms().size(), i + 1);
 
 		}
 
 		int size = group.getAlarms().size();
-		group.removeAlarm(test);
+		group.removeAlarmFromGroup(test);
 		assertEquals(group.getAlarms().size(), size - 1);
 
 		list = group.getAlarms();
 		// Empty the list
 		for (int i = 0; i < list.size(); i++) {
-			group.removeAlarm(list.get(i));
+			group.removeAlarmFromGroup(list.get(i));
 			assertEquals(group.getAlarms().size(), list.size() - (i + 1));
 		}
 
