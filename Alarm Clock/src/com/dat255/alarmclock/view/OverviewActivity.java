@@ -5,7 +5,6 @@ import java.util.List;
 import android.app.ListActivity;
 import android.content.Context;
 import android.content.Intent;
-import android.os.Bundle;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.view.Menu;
@@ -23,92 +22,44 @@ import com.dat255.alarmclock.logic.group.IGroup;
 
 public class OverviewActivity extends ListActivity {
 
-	@Override
-	public void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
+	private List<IGroup> groups;
 
-		/*
-		 * setContentView(R.layout.overviewscreen);
-		 * 
-		 * button = (Button) findViewById(R.id.homeButton);
-		 * Tools.createOnClickLauncher(button, OverviewActivity.this,
-		 * HomeActivity.class);
-		 * 
-		 * button = (Button) findViewById(R.id.alarmButton);
-		 * Tools.createOnClickLauncher(button, OverviewActivity.this,
-		 * AlarmActivity.class);
-		 * 
-		 * button = (Button) findViewById(R.id.groupButton);
-		 * Tools.createOnClickLauncher(button, OverviewActivity.this,
-		 * GroupActivity.class);
-		 */
-	}
-
-	// Shows a menu when menubutton is pushed
+	/**
+	 * Set up the options menu
+	 */
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		MenuInflater inflater = getMenuInflater();
+
 		inflater.inflate(R.menu.overviewmenu, menu);
+
 		return true;
 	}
 
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		Intent i;
-		switch (item.getItemId()) {
-		case R.id.createalarm:
-			i = new Intent(this, AlarmActivity.class);
-			startActivity(i);
-			return true;
-		case R.id.creategroup:
-			i = new Intent(this, GroupActivity.class);
-			startActivity(i);
-			return true;
-		default:
-			return super.onOptionsItemSelected(item);
-		}
-	}
-
-	// Shows a menu when an group/alarm in the list is pushed for a longer time
+	/**
+	 * Set up a long-press context menu
+	 */
 	@Override
 	public void onCreateContextMenu(ContextMenu menu, View v, ContextMenuInfo menuInfo) {
 		super.onCreateContextMenu(menu, v, menuInfo);
-		MenuInflater inflater = getMenuInflater();
-		inflater.inflate(R.menu.deletemenu, menu);
-	}
 
-	@Override
-	public boolean onContextItemSelected(MenuItem item) {
-		AdapterContextMenuInfo info = (AdapterContextMenuInfo) item.getMenuInfo();
-		switch (item.getItemId()) {
-		case R.id.delete:
-			// TODO Implement delete
-			return true;
-		default:
-			return super.onContextItemSelected(item);
-		}
+		MenuInflater inflater = getMenuInflater();
+
+		inflater.inflate(R.menu.deletemenu, menu);
 	}
 
 	@Override
 	public void onStart() {
 		super.onStart();
-		final Context context = this;
 
-		// List all groups
-		final List<IGroup> groups = GroupManager.getInstance().getGroups();
-
-		String[] names = new String[groups.size()];
-
-		for (int i = 0; i < groups.size(); i++) {
-			names[i] = groups.get(i).getName();
-		}
-
-		setListAdapter(new ArrayAdapter<String>(context, R.layout.overviewscreen_list_item, names));
+		fillListView();
 
 		// Register the context menu
 		registerForContextMenu(getListView());
 
 		// Set onItemClickListener()
+		final Context context = this;
+
 		getListView().setOnItemClickListener(new OnItemClickListener() {
 
 			@Override
@@ -122,5 +73,67 @@ public class OverviewActivity extends ListActivity {
 				context.startActivity(intent);
 			}
 		});
+	}
+
+	private void fillListView() {
+		// Display all groups in the list view
+		groups = GroupManager.getInstance().getGroups();
+
+		String[] names = new String[groups.size()];
+
+		for (int i = 0; i < groups.size(); i++) {
+			names[i] = groups.get(i).getName();
+		}
+
+		setListAdapter(new ArrayAdapter<String>(this, R.layout.overviewscreen_list_item, names));
+	}
+
+	/**
+	 * Handle options menu
+	 */
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		Intent intent;
+
+		switch (item.getItemId()) {
+		case R.id.createalarm:
+			intent = new Intent(this, AlarmActivity.class);
+
+			intent.putExtra("alarmedit", false);
+
+			startActivity(intent);
+
+			return true;
+		case R.id.creategroup:
+
+			// TODO Should ask the user for a name and then create the group
+
+			return true;
+		default:
+			return super.onOptionsItemSelected(item);
+		}
+	}
+
+	/**
+	 * Handle long-press context menu
+	 */
+	@Override
+	public boolean onContextItemSelected(MenuItem item) {
+		AdapterContextMenuInfo info = (AdapterContextMenuInfo) item.getMenuInfo();
+
+		switch (item.getItemId()) {
+		case R.id.delete:
+
+			// Delete the selected group
+			IGroup group = groups.get((int) info.id);
+
+			GroupManager.getInstance().removeGroup(group);
+
+			fillListView();
+
+			return true;
+		default:
+			return super.onContextItemSelected(item);
+		}
 	}
 }

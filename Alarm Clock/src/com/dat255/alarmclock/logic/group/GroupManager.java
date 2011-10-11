@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.dat255.alarmclock.logic.alarm.IAlarm;
 import com.dat255.alarmclock.utilities.Tools;
 
 public class GroupManager {
@@ -49,6 +50,12 @@ public class GroupManager {
 	 */
 	public void removeGroup(IGroup group) {
 		if (group != null) {
+			List<IAlarm> alarms = group.getAlarms();
+
+			for (IAlarm alarm : alarms) {
+				group.removeAlarm(alarm);
+			}
+
 			map.remove(group.getId());
 		}
 	}
