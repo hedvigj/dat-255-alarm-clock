@@ -4,6 +4,7 @@ import java.util.Calendar;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.widget.Button;
 
 import com.dat255.alarmclock.R;
@@ -46,5 +47,15 @@ public class HomeActivity extends Activity {
 		IGroup group2 = GroupManager.getInstance().createGroup();
 
 		group2.setName("Jobb-gruppen");
+	}
+
+	@Override
+	public boolean onKeyDown(final int keyCode, final KeyEvent event) {
+
+		if (keyCode == KeyEvent.KEYCODE_BACK) {
+			moveTaskToBack(false);
+		}
+
+		return true;
 	}
 }

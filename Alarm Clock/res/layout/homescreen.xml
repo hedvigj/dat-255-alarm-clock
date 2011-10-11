@@ -20,7 +20,7 @@
 			android:id="@+id/overviewButton" 
 			android:layout_height="wrap_content" 
 			android:layout_width="85dip"
-			android:text="@string/overview"/>
+			android:text="@string/alarms"/>
 		
 	</LinearLayout>
 </RelativeLayout>

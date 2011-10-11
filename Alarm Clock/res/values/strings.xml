@@ -2,10 +2,16 @@
 <resources>
     <string name="app_name">Alarm Clock</string>
     <string name="alarm">Alarm</string>
+    <string name="alarms">Alarm</string>
+    <string name="createalarm">Skapa alarm</string>
+    <string name="creategroup">Skapa grupp</string>
+    <string name="delete">Radera</string>
     <string name="everyday">Alla dagar</string>
     <string name="finish">Klar</string>
     <string name="friday">Fredag</string>
     <string name="group">Grupp</string>
+    <string name="groups">Grupper</string>
+    <string name="ignore">Ignore</string>
     <string name="home">Hem</string>
     <string name="monday">Måndag</string>
     <string name="overview">Översikt</string>
@@ -13,13 +19,9 @@
     <string name="repeat">Repetera</string>
     <string name="saturday">Lördag</string>
     <string name="sleepwarning">Sömnvarning</string>
+    <string name="snooze">Snooze</string>
     <string name="sunday">Söndag</string>
     <string name="thursday">Torsdag</string>
     <string name="tuesday">Tisdag</string>
     <string name="wednesday">Onsdag</string>
-    <string name="snooze">Snooze</string>
-    <string name="ignore">Ignore</string>
-    <string name="createalarm">Skapa alarm</string>
-    <string name="creategroup">Skapa grupp</string>
-    <string name="delete">Radera</string>
 </resources>
