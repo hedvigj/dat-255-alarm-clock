@@ -53,7 +53,7 @@ public class HomeActivity extends Activity {
 	public boolean onKeyDown(final int keyCode, final KeyEvent event) {
 
 		if (keyCode == KeyEvent.KEYCODE_BACK) {
-			moveTaskToBack(false);
+			moveTaskToBack(true);
 		}
 
 		return true;
