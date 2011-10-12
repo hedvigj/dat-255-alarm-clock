@@ -3,6 +3,7 @@
     <string name="app_name">Alarm Clock</string>
     <string name="alarm">Alarm</string>
     <string name="alarms">Alarm</string>
+    <string name ="cancel">Stäng</string>
     <string name="createalarm">Skapa alarm</string>
     <string name="creategroup">Skapa grupp</string>
     <string name="delete">Radera</string>
@@ -14,6 +15,8 @@
     <string name="ignore">Ignore</string>
     <string name="home">Hem</string>
     <string name="monday">Måndag</string>
+	<string name ="namedialog">Namnge grupp</string>
+    <string name ="ok">Ok</string>
     <string name="overview">Översikt</string>
     <string name="overview_screen">OverviewScreen</string>
     <string name="repeat">Repetera</string>

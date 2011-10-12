@@ -2,8 +2,10 @@ package com.dat255.alarmclock.view;
 
 import java.util.List;
 
+import android.app.AlertDialog;
 import android.app.ListActivity;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
@@ -15,6 +17,7 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 
 import com.dat255.alarmclock.R;
 import com.dat255.alarmclock.logic.group.GroupManager;
@@ -81,12 +84,43 @@ public class OverviewActivity extends ListActivity {
 	 */
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		Intent intent;
 
 		switch (item.getItemId()) {
 		case R.id.creategroup:
 
-			// TODO Should ask the user for a name and then create the group
+			// Creates an dialog to insert name of group with ok and cancel
+			// option
+			AlertDialog.Builder alert = new AlertDialog.Builder(this);
+			final EditText input = new EditText(this);
+			alert.setMessage(R.string.namedialog);
+			alert.setView(input);
+			alert.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+
+				@Override
+				public void onClick(DialogInterface dialog, int button) {
+					String s = input.getText().toString().trim();
+
+					if (s.equals("")) {
+						dialog.cancel();
+					} else {
+						IGroup group = GroupManager.getInstance().createGroup();
+
+						group.setName(s);
+
+						fillListActivity();
+					}
+				}
+
+			});
+
+			alert.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
+
+				@Override
+				public void onClick(DialogInterface dialog, int button) {
+					dialog.cancel();
+				}
+			});
+			alert.show();
 
 			return true;
 		default:
