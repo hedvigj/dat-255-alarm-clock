@@ -76,13 +76,13 @@ public class TriggerActivity extends Activity implements OnClickListener {
 	public void onClick(View view) {
 		switch (view.getId()) {
 		case R.id.snoozeButton:
-			Sound.soundStop(this);
+			Sound.soundStop();
 			Toast.makeText(this, "Alarm will ring again in 1 min", Toast.LENGTH_LONG).show();
 			alarm.snooze(1);
 			break;
 		case R.id.ignoreButton:
 			alarm.disable();
-			Sound.soundStop(this);
+			Sound.soundStop();
 			Intent i = new Intent(this, HomeActivity.class);
 			startActivity(i);
 		}

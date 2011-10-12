@@ -8,33 +8,53 @@ import com.dat255.alarmclock.R;
 public class Sound {
 
 	private static MediaPlayer player = null;
-	private static boolean soundOn = false;
 
+	/**
+	 * Start the specific sound of this class
+	 * 
+	 * @param context
+	 *            is the context in which sound will connected to
+	 */
 	public static void soundStart(Context context) {
-		soundStop(context);
+		soundStop();
 		player = MediaPlayer.create(context, R.raw.test);
+		player.setLooping(false);
 		player.start();
-		soundOn = true;
 	}
 
+	/**
+	 * Start the specific sound of this class and loop it until it is turned of
+	 * 
+	 * @param context
+	 *            is the context in which sound will connected to
+	 */
 	public static void soundLoopStart(Context context) {
-		soundStop(context);
+		soundStop();
 		player = MediaPlayer.create(context, R.raw.test);
 		player.setLooping(true);
 		player.start();
-		soundOn = true;
 	}
 
-	public static void soundStop(Context context) {
+	/**
+	 * Stop current sound origeneting from this class
+	 */
+	public static void soundStop() {
 		if (player != null) {
 			player.stop();
 			player.release();
 			player = null;
 		}
-		soundOn = false;
 	}
 
+	/**
+	 * Is sound playing from this class
+	 * 
+	 * @return true if there is a sound playing, else false
+	 */
 	public static boolean isSoundOn() {
-		return soundOn;
+		if (player == null) {
+			return false;
+		}
+		return player.isPlaying();
 	}
 }
