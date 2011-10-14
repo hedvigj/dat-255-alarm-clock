@@ -7,8 +7,7 @@
     	android:id="@+id/current_time"
     	android:layout_width="fill_parent"
     	android:layout_height="wrap_content"
-    	android:layout_alignParentTop="true"
-    	android:layout_marginTop="30dip"/>
+    	android:gravity="center_vertical|center_horizontal"/>
 	<LinearLayout 
 		android:id="@+id/linearbottom"
 		android:orientation="horizontal"
@@ -19,8 +18,7 @@
 		<Button 
 			android:id="@+id/overviewButton" 
 			android:layout_height="wrap_content" 
-			android:layout_width="85dip"
+			android:layout_width="fill_parent"
 			android:text="@string/alarms"/>
-		
 	</LinearLayout>
 </RelativeLayout>

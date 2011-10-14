@@ -112,8 +112,7 @@ public class AlarmActivity extends Activity {
 
 			@Override
 			public void onClick(View v) {
-				setAlarm();
-			}
+				setAlarm();	}
 		});
 	}
 

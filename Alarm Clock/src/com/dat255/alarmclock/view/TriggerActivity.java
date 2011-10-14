@@ -50,8 +50,8 @@ public class TriggerActivity extends Activity implements OnClickListener {
 	public void onResume() {
 		super.onResume();
 		// Start alarm sound if not already started
-		if (Sound.isSoundOn() == false) {
-			Sound.soundLoopStart(this);
+		if (Sound.getInstance().isSoundOn() == false) {
+			Sound.getInstance().soundLoopStart(this);
 		}
 
 		// Get the id of the alarm that triggered this screen
@@ -78,13 +78,13 @@ public class TriggerActivity extends Activity implements OnClickListener {
 	public void onClick(View view) {
 		switch (view.getId()) {
 		case R.id.snoozeButton:
-			Sound.soundStop();
+			Sound.getInstance().soundStop();
 			Toast.makeText(this, "Alarm will ring again in 1 min", Toast.LENGTH_LONG).show();
 			alarm.snooze(1);
 			break;
 		case R.id.ignoreButton:
 			alarm.disable();
-			Sound.soundStop();
+			Sound.getInstance().soundStop();
 			Intent i = new Intent(this, HomeActivity.class);
 			startActivity(i);
 		}
