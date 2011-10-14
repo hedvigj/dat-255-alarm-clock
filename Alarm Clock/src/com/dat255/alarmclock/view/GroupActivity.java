@@ -52,11 +52,7 @@ public class GroupActivity extends ListActivity {
 
 		setListAdapter(new ArrayAdapter<String>(this, R.layout.list_item, names));
 
-		ListView view = getListView();
-
-		for (int i = 0; i < view.getCount(); i++) {
-			view.setItemChecked(i, group.getAlarms().get(i).isEnabled());
-		}
+		updateCheckBoxes();
 
 	}
 
@@ -85,7 +81,8 @@ public class GroupActivity extends ListActivity {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-				getListView().setItemChecked(position, group.getAlarms().get(position).isEnabled());
+				// Set the checks' status according to the alarms
+				updateCheckBoxes();
 
 				// Open the alarm activity to view this alarm
 				Intent intent = new Intent(context, AlarmActivity.class);
@@ -147,6 +144,20 @@ public class GroupActivity extends ListActivity {
 		MenuInflater inflater = getMenuInflater();
 
 		inflater.inflate(R.menu.longpress_menu, menu);
+
+		AdapterContextMenuInfo info = (AdapterContextMenuInfo) menuInfo;
+
+		// See if the alarm corresponding to the selected item is enabled
+		boolean enabled = alarms.get(info.position).isEnabled();
+
+		// Set the check status according to the alarm's status
+		getListView().setItemChecked(info.position, enabled);
+
+		// Show only the option to enable the alarm if it is disabled, and vice
+		// versa
+		menu.findItem(R.id.enable).setVisible(!enabled);
+		menu.findItem(R.id.disable).setVisible(enabled);
+
 	}
 
 	/**
@@ -175,7 +186,7 @@ public class GroupActivity extends ListActivity {
 
 			alarm.enable();
 
-			chk.setChecked(alarm.isEnabled());
+			updateCheckBoxes();
 
 			return true;
 
@@ -185,11 +196,22 @@ public class GroupActivity extends ListActivity {
 
 			alarm.disable();
 
-			chk.setChecked(alarm.isEnabled());
+			updateCheckBoxes();
 
 			return true;
 		default:
 			return super.onContextItemSelected(item);
 		}
+	}
+
+	public void updateCheckBoxes() {
+
+		ListView view = getListView();
+
+		// Set all checkboxes according to the status of the alarms
+		for (int i = 0; i < view.getCount(); i++) {
+			view.setItemChecked(i, group.getAlarms().get(i).isEnabled());
+		}
+
 	}
 }

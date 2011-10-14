@@ -56,9 +56,9 @@ public class OverviewActivity extends ListActivity {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-				// Check or uncheck the checkbox according to the status of the
-				// group
-				getListView().setItemChecked(position, groups.get(position).isEnabled());
+				// Check or uncheck the checkboxes according to the status of
+				// the groups
+				updateCheckBoxes();
 
 				// Open the group activity
 				Intent intent = new Intent(context, GroupActivity.class);
@@ -82,10 +82,8 @@ public class OverviewActivity extends ListActivity {
 
 		setListAdapter(new ArrayAdapter<String>(this, R.layout.list_item, names));
 
-		// See if groups are enabled, and set the checkbox accordingly
-		for (int i = 0; i < groups.size(); i++) {
-			getListView().setItemChecked(i, groups.get(i).isEnabled());
-		}
+		// See if groups are enabled, and set the checkboxes accordingly
+		updateCheckBoxes();
 
 	}
 
@@ -160,6 +158,29 @@ public class OverviewActivity extends ListActivity {
 		MenuInflater inflater = getMenuInflater();
 
 		inflater.inflate(R.menu.longpress_menu, menu);
+
+		AdapterContextMenuInfo info = (AdapterContextMenuInfo) menuInfo;
+
+		// See if the group corresponding to the selected item is enabled
+		boolean enabled = groups.get(info.position).isEnabled();
+
+		// Set the check status according to the group's status
+		getListView().setItemChecked(info.position, enabled);
+
+		// If the group is empty, remove the possibility to enable or disable it
+		if (!groups.get(info.position).getAlarms().isEmpty()) {
+
+			// Show only the option to enable the group if it is disabled, and
+			// vice versa
+			menu.findItem(R.id.enable).setVisible(!enabled);
+			menu.findItem(R.id.disable).setVisible(enabled);
+
+		} else {
+
+			// Hide both the enable and disable options
+			menu.findItem(R.id.enable).setVisible(false);
+			menu.findItem(R.id.disable).setVisible(false);
+		}
 	}
 
 	/**
@@ -188,7 +209,7 @@ public class OverviewActivity extends ListActivity {
 			group.enable();
 
 			// Check the group's checkbox to confirm enabling
-			chk.setChecked(true);
+			updateCheckBoxes();
 
 			return true;
 
@@ -200,11 +221,23 @@ public class OverviewActivity extends ListActivity {
 			group.disable();
 
 			// Uncheck the group's checkbox to confirm disabling
-			chk.setChecked(false);
+			updateCheckBoxes();
 
 			return true;
 		default:
 			return super.onContextItemSelected(item);
 		}
 	}
+
+	public void updateCheckBoxes() {
+
+		ListView view = getListView();
+
+		// Set all checkboxes according to the status of the groups
+		for (int i = 0; i < view.getCount(); i++) {
+			view.setItemChecked(i, groups.get(i).isEnabled());
+		}
+
+	}
+
 }
