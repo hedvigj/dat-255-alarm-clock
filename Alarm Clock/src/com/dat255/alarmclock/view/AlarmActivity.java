@@ -18,11 +18,13 @@ import android.widget.Toast;
 import com.dat255.alarmclock.R;
 import com.dat255.alarmclock.logic.alarm.AlarmManager;
 import com.dat255.alarmclock.logic.alarm.IAlarm;
+import com.dat255.alarmclock.logic.group.GroupManager;
 
 public class AlarmActivity extends Activity {
 
 	private boolean editMode;
 	private long alarmId;
+	private long groupId;
 
 	private TimePicker timePicker;
 
@@ -124,6 +126,8 @@ public class AlarmActivity extends Activity {
 
 		alarmId = getIntent().getLongExtra("alarmid", 0);
 
+		groupId = getIntent().getLongExtra("groupid", 0);
+
 		// If in edit mode, adjust the views to match the alarm
 		updateViews();
 	}
@@ -134,6 +138,8 @@ public class AlarmActivity extends Activity {
 		if (!editMode) {
 			// Create a new alarm instance
 			alarm = AlarmManager.getInstance().createAlarm(getApplicationContext(), TriggerActivity.class);
+
+			GroupManager.getInstance().findGroupById(groupId).addAlarmToGroup(alarm);
 		} else {
 			// Get the alarm instance
 			alarm = AlarmManager.getInstance().findAlarmById(alarmId);
