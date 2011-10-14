@@ -3,6 +3,7 @@ package com.dat255.alarmclock.view;
 import java.util.Calendar;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -20,7 +21,7 @@ import com.dat255.alarmclock.logic.alarm.AlarmManager;
 import com.dat255.alarmclock.logic.alarm.IAlarm;
 import com.dat255.alarmclock.logic.group.GroupManager;
 
-public class AlarmActivity extends Activity {
+public class AlarmActivity extends Activity implements OnClickListener {
 
 	private boolean editMode;
 	private long alarmId;
@@ -33,6 +34,9 @@ public class AlarmActivity extends Activity {
 		super.onCreate(savedInstanceState);
 
 		setContentView(R.layout.alarmscreen);
+
+		Button finish = (Button) findViewById(R.id.finishButton);
+		finish.setOnClickListener(this);
 
 		// Handle the time picker
 		timePicker = (TimePicker) findViewById(R.id.alarmtimepicker);
@@ -104,16 +108,6 @@ public class AlarmActivity extends Activity {
 			});
 
 		}
-
-		// Handle finish button
-		Button finish = (Button) findViewById(R.id.finishButton);
-
-		finish.setOnClickListener(new OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				setAlarm();	}
-		});
 	}
 
 	@Override
@@ -176,5 +170,12 @@ public class AlarmActivity extends Activity {
 			timePicker.setCurrentHour(alarmTime.get(Calendar.HOUR_OF_DAY));
 			timePicker.setCurrentMinute(alarmTime.get(Calendar.MINUTE));
 		}
+	}
+
+	@Override
+	public void onClick(View v) {
+		setAlarm();
+		Intent i = new Intent(this, GroupActivity.class);
+		startActivity(i);
 	}
 }

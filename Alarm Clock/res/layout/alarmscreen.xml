@@ -93,18 +93,23 @@
 		  		android:text="@string/sleepwarning"
 		  		android:id="@+id/sleepwarningCheckBox" 
 		  		android:layout_height="wrap_content" 
-		  		android:layout_width="wrap_content" />
-		  		
-		  	<Button
+		  		android:layout_width="wrap_content" 
+		  		android:layout_marginBottom="50dip"
+		  		/>	
+	  	</LinearLayout>
+  	</ScrollView>
+  	<LinearLayout 
+		android:id="@+id/linearbottom"
+		android:orientation="horizontal"
+		android:layout_width="fill_parent"
+		android:layout_height="wrap_content"
+		android:layout_alignParentBottom="true">
+			<Button
 		  		android:id="@+id/finishButton"
 		  		android:layout_width="fill_parent"
 		  		android:layout_height="wrap_content"
-		  		android:layout_marginBottom="85dip"
-  				android:layout_centerHorizontal="true"
   				android:text="@string/finish" />
-  				
-	  	</LinearLayout>
-  	</ScrollView>
+  	</LinearLayout>
 </RelativeLayout>
 
 

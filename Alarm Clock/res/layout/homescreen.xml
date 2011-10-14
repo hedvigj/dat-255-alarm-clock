@@ -7,14 +7,14 @@
     	android:id="@+id/current_time"
     	android:layout_width="fill_parent"
     	android:layout_height="wrap_content"
-    	android:gravity="center_vertical|center_horizontal"/>
+    	android:layout_marginTop="30dip"
+    	/>
 	<LinearLayout 
 		android:id="@+id/linearbottom"
 		android:orientation="horizontal"
 		android:layout_width="fill_parent"
 		android:layout_height="wrap_content"
-		android:layout_alignParentBottom="true"
-		android:gravity="center_horizontal"	>
+		android:layout_alignParentBottom="true">
 		<Button 
 			android:id="@+id/overviewButton" 
 			android:layout_height="wrap_content" 
