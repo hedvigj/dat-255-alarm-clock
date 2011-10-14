@@ -11,8 +11,6 @@ public class HomeActivityTest extends ActivityInstrumentationTestCase2<HomeActiv
 
 	private Activity activity;
 	private Button overviewButton;
-	private Button alarmButton;
-	private Button groupButton;
 	private View currentTime;
 
 	public HomeActivityTest() {
@@ -23,16 +21,13 @@ public class HomeActivityTest extends ActivityInstrumentationTestCase2<HomeActiv
 	protected void setUp() throws Exception {
 		super.setUp();
 		activity = getActivity();
-		groupButton = (Button) activity.findViewById(com.dat255.alarmclock.R.id.groupButton);
-		alarmButton = (Button) activity.findViewById(com.dat255.alarmclock.R.id.alarmButton);
 		overviewButton = (Button) activity.findViewById(com.dat255.alarmclock.R.id.overviewButton);
 		currentTime = activity.findViewById(com.dat255.alarmclock.R.id.current_time);
+
 	}
 
 	public void testPrecondition() {
 		assertNotNull(overviewButton);
-		assertNotNull(alarmButton);
-		assertNotNull(groupButton);
 		assertNotNull(currentTime);
 	}
 
