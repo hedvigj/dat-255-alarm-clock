@@ -70,4 +70,11 @@ public interface IAlarm extends IEntity {
 	 */
 	public void snooze(int minutes);
 
+	/**
+	 * Adds a number of milliseconds to the set trigger time.
+	 * 
+	 * @param milliseconds
+	 *            the number of milliseconds to add
+	 */
+	public void addTriggerTime(int milliseconds);
 }

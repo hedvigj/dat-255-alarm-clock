@@ -178,11 +178,11 @@ public class Alarm implements IAlarm {
 	 */
 	@Override
 	public void onAlarmTriggered(Context context) {
+		disable();
+
 		for (IAlarmProperty property : properties) {
 			property.onAlarmTriggered(context);
 		}
-
-		disable();
 	}
 
 	/**
@@ -211,6 +211,27 @@ public class Alarm implements IAlarm {
 
 		// Add the number of snooze minutes, allow no negative values
 		current.add(Calendar.MINUTE, Math.abs(minutes));
+
+		// Set the alarm trigger time
+		setTriggerTime(current.getTimeInMillis());
+	}
+
+	/**
+	 * Adds a number of milliseconds to the set trigger time.
+	 * 
+	 * @param milliseconds
+	 *            the number of milliseconds to add
+	 */
+	@Override
+	public void addTriggerTime(int milliseconds) {
+		// Get current trigger time
+		Calendar current = Calendar.getInstance();
+
+		// Start with the current trigger time
+		current.setTimeInMillis(triggerTime);
+
+		// Add the number of milliseconds, allow no negative values
+		current.add(Calendar.MILLISECOND, Math.abs(milliseconds));
 
 		// Set the alarm trigger time
 		setTriggerTime(current.getTimeInMillis());

@@ -59,6 +59,12 @@ public class GroupTest extends AndroidTestCase {
 		public void snooze(int minutes) {
 		}
 
+		@Override
+		public void addTriggerTime(int milliseconds) {
+			// TODO Auto-generated method stub
+
+		}
+
 	}
 
 	@Override

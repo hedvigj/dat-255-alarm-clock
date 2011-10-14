@@ -18,9 +18,13 @@ import android.widget.Toast;
 import com.dat255.alarmclock.R;
 import com.dat255.alarmclock.logic.alarm.AlarmManager;
 import com.dat255.alarmclock.logic.alarm.IAlarm;
-import com.dat255.alarmclock.utilities.Tools;
 
 public class AlarmActivity extends Activity {
+
+	private boolean editMode;
+	private long alarmId;
+
+	private TimePicker timePicker;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -28,13 +32,25 @@ public class AlarmActivity extends Activity {
 
 		setContentView(R.layout.alarmscreen);
 
-		CheckBox checkRepeat = (CheckBox) findViewById(R.id.repeatCheckBox);
+		// Handle the time picker
+		timePicker = (TimePicker) findViewById(R.id.alarmtimepicker);
+
+		timePicker.setOnTimeChangedListener(new OnTimeChangedListener() {
+			@Override
+			public void onTimeChanged(TimePicker view, int hourOfDay, int minute) {
+			}
+		});
+
+		// Handle repeat
+		final CheckBox repeat = (CheckBox) findViewById(R.id.repeatCheckBox);
+
 		final LinearLayout linearWeekdays = (LinearLayout) findViewById(R.id.weekdays);
+
 		linearWeekdays.setVisibility(View.GONE);
 
 		// Make the weekdays visible if the checkRepeat checkbox is checked,
 		// invisible otherwise
-		checkRepeat.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+		repeat.setOnCheckedChangeListener(new OnCheckedChangeListener() {
 
 			@Override
 			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -48,15 +64,15 @@ public class AlarmActivity extends Activity {
 		});
 
 		final CheckBox checkEveryday = (CheckBox) findViewById(R.id.checkEveryday);
-		final CheckBox[] checks = new CheckBox[7];
 
-		checks[0] = (CheckBox) findViewById(R.id.checkMonday);
-		checks[1] = (CheckBox) findViewById(R.id.checkTuesday);
-		checks[2] = (CheckBox) findViewById(R.id.checkWednesday);
-		checks[3] = (CheckBox) findViewById(R.id.checkThursday);
-		checks[4] = (CheckBox) findViewById(R.id.checkFriday);
-		checks[5] = (CheckBox) findViewById(R.id.checkSaturday);
-		checks[6] = (CheckBox) findViewById(R.id.checkSunday);
+		final CheckBox[] repeatWeekdays = new CheckBox[7];
+		repeatWeekdays[0] = (CheckBox) findViewById(R.id.checkMonday);
+		repeatWeekdays[1] = (CheckBox) findViewById(R.id.checkTuesday);
+		repeatWeekdays[2] = (CheckBox) findViewById(R.id.checkWednesday);
+		repeatWeekdays[3] = (CheckBox) findViewById(R.id.checkThursday);
+		repeatWeekdays[4] = (CheckBox) findViewById(R.id.checkFriday);
+		repeatWeekdays[5] = (CheckBox) findViewById(R.id.checkSaturday);
+		repeatWeekdays[6] = (CheckBox) findViewById(R.id.checkSunday);
 
 		// Sets all weekdays to the same check status as the checkEveryday
 		// CheckBox
@@ -65,7 +81,7 @@ public class AlarmActivity extends Activity {
 			@Override
 			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 				if (isChecked) {
-					for (CheckBox c : checks) {
+					for (CheckBox c : repeatWeekdays) {
 						c.setChecked(true);
 					}
 				}
@@ -74,7 +90,7 @@ public class AlarmActivity extends Activity {
 
 		// If any one of the weekdays is unchecked, all weekdays are no longer
 		// checked and the checkEveryday checkbox will be unchecked
-		for (CheckBox c : checks) {
+		for (CheckBox c : repeatWeekdays) {
 			c.setOnCheckedChangeListener(new OnCheckedChangeListener() {
 
 				@Override
@@ -87,44 +103,72 @@ public class AlarmActivity extends Activity {
 
 		}
 
-		Button homeButton = (Button) findViewById(R.id.homeButton);
-		Tools.createOnClickLauncher(homeButton, AlarmActivity.this, HomeActivity.class);
+		// Handle finish button
+		Button finish = (Button) findViewById(R.id.finishButton);
 
-		Button overviewButton = (Button) findViewById(R.id.overviewButton);
-		Tools.createOnClickLauncher(overviewButton, AlarmActivity.this, OverviewActivity.class);
-
-		Button groupButton = (Button) findViewById(R.id.groupButton);
-		Tools.createOnClickLauncher(groupButton, AlarmActivity.this, GroupActivity.class);
-
-		TimePicker timePicker = (TimePicker) findViewById(R.id.alarmtimepicker);
-
-		timePicker.setOnTimeChangedListener(new OnTimeChangedListener() {
-			@Override
-			public void onTimeChanged(TimePicker view, int hourOfDay, int minute) {
-			}
-		});
-
-		// Handle finish button action
-		Button finishButton = (Button) findViewById(R.id.finishButton);
-
-		finishButton.setOnClickListener(new OnClickListener() {
+		finish.setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
-				// Just initialize a test alarm for now
-				Toast.makeText(v.getContext(), "Alarm created, should sound in 5 seconds", Toast.LENGTH_SHORT).show();
-
-				IAlarm alarm = AlarmManager.getInstance().createAlarm(getApplicationContext(), TriggerActivity.class);
-
-				Calendar c = Calendar.getInstance();
-				c.add(Calendar.SECOND, 5);
-
-				alarm.setTriggerTime(c.getTimeInMillis());
-
-				alarm.enable();
+				createAlarm();
 			}
-
 		});
+	}
 
+	@Override
+	public void onStart() {
+		super.onStart();
+
+		// Get intent data
+		editMode = getIntent().getBooleanExtra("alarmedit", false);
+
+		alarmId = getIntent().getLongExtra("alarmid", 0);
+
+		// If in edit mode, adjust the views to match the alarm
+		updateViews();
+	}
+
+	private void createAlarm() {
+		IAlarm alarm;
+
+		if (!editMode) {
+			// Create a new alarm instance
+			alarm = AlarmManager.getInstance().createAlarm(getApplicationContext(), TriggerActivity.class);
+		} else {
+			// Get the alarm instance
+			alarm = AlarmManager.getInstance().findAlarmById(alarmId);
+		}
+
+		// Set trigger time
+		Calendar time = Calendar.getInstance();
+
+		long currentMilliseconds = time.getTimeInMillis();
+
+		time.set(Calendar.HOUR_OF_DAY, timePicker.getCurrentHour());
+		time.set(Calendar.MINUTE, timePicker.getCurrentMinute());
+
+		if (time.getTimeInMillis() < currentMilliseconds) {
+			time.add(Calendar.HOUR_OF_DAY, 24);
+		}
+
+		alarm.setTriggerTime(time.getTimeInMillis());
+
+		// Enable the alarm
+		alarm.enable();
+
+		Toast.makeText(this, "Alarm set to sound in " + (time.getTimeInMillis() - currentMilliseconds) / (1000 * 60) + " minutes.",
+				Toast.LENGTH_SHORT).show();
+	}
+
+	private void updateViews() {
+		if (editMode) {
+			IAlarm alarm = AlarmManager.getInstance().findAlarmById(alarmId);
+
+			Calendar alarmTime = Calendar.getInstance();
+			alarmTime.setTimeInMillis(alarm.getTriggerTime());
+
+			timePicker.setCurrentHour(alarmTime.get(Calendar.HOUR_OF_DAY));
+			timePicker.setCurrentMinute(alarmTime.get(Calendar.MINUTE));
+		}
 	}
 }

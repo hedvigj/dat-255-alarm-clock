@@ -59,6 +59,8 @@ public class TriggerActivity extends Activity implements OnClickListener {
 
 		alarm = AlarmManager.getInstance().findAlarmById(alarmId);
 
+		alarm.onAlarmTriggered(this);
+
 		Toast.makeText(this, "Alarm triggered: " + alarmId, Toast.LENGTH_LONG).show();
 
 		// Prevent the phone from sleeping

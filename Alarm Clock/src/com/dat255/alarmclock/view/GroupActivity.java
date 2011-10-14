@@ -29,30 +29,6 @@ public class GroupActivity extends ListActivity {
 
 	private List<IAlarm> alarms;
 
-	@Override
-	public void onStart() {
-		super.onStart();
-
-		fillListActivity();
-
-		// Register the context menu
-		registerForContextMenu(getListView());
-
-		// Set onItemClickListener()
-		final Context context = this;
-
-		getListView().setOnItemClickListener(new OnItemClickListener() {
-
-			@Override
-			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-				// Show which alarm the user clicked on
-				Toast.makeText(context, "Clicked on alarm " + alarms.get((int) id).getId(), Toast.LENGTH_SHORT).show();
-
-			}
-		});
-	}
-
 	private void fillListActivity() {
 		// Get the desired group
 		long groupId = getIntent().getLongExtra("groupid", 0);
@@ -72,6 +48,38 @@ public class GroupActivity extends ListActivity {
 		}
 
 		setListAdapter(new ArrayAdapter<String>(this, R.layout.groupscreen_list_item, names));
+	}
+
+	@Override
+	public void onStart() {
+		super.onStart();
+
+		fillListActivity();
+
+		// Register the context menu
+		registerForContextMenu(getListView());
+
+		// Set onItemClickListener()
+		final Context context = this;
+
+		getListView().setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+				// Open the alarm activity to view this alarm
+				Intent intent = new Intent(context, AlarmActivity.class);
+
+				intent.putExtra("alarmedit", true);
+				intent.putExtra("alarmid", alarms.get((int) id).getId());
+
+				context.startActivity(intent);
+
+				// Show which alarm the user clicked on: TEMPORARY
+				Toast.makeText(context, "Clicked on alarm " + alarms.get((int) id).getId(), Toast.LENGTH_SHORT).show();
+
+			}
+		});
 	}
 
 	/**
@@ -95,6 +103,7 @@ public class GroupActivity extends ListActivity {
 
 		switch (item.getItemId()) {
 		case R.id.createalarm:
+			// Open the alarm activity to create a new alarm
 			intent = new Intent(this, AlarmActivity.class);
 
 			intent.putExtra("alarmedit", false);

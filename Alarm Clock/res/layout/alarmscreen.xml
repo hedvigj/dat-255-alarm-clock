@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
-  xmlns:android="http://schemas.android.com/apk/res/android"
-  android:layout_width="match_parent"
-  android:layout_height="match_parent">
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent">
+	
   	<TimePicker 
-  	android:id="@+id/alarmtimepicker" 
-  	android:layout_width="250dip" 
-  	android:layout_height="130dip" 
-  	android:layout_centerHorizontal="true"/>
+  		android:id="@+id/alarmtimepicker" 
+  		android:layout_width="250dip" 
+  		android:layout_height="130dip" 
+  		android:layout_centerHorizontal="true"/>
+  		
   	<ScrollView 
   		android:id="@+id/propertyScroll"
   		android:layout_below="@+id/alarmtimepicker"
@@ -15,6 +17,7 @@
   		android:layout_width="match_parent"
   		android:layout_height="match_parent"
   		android:padding="10dip">
+  		
 	  	<LinearLayout 
 	  		android:id="@+id/properties"
 	  		android:layout_width="match_parent"
@@ -89,45 +92,17 @@
 		  		android:id="@+id/sleepwarningCheckBox" 
 		  		android:layout_height="wrap_content" 
 		  		android:layout_width="wrap_content" />
-		  
-		  
 		  		
+		  	<Button
+		  		android:id="@+id/finishButton"
+		  		android:layout_width="100dip"
+		  		android:layout_height="wrap_content"
+		  		android:layout_above="@+id/linearbottom"
+  				android:layout_centerHorizontal="true"
+  				android:text="@string/finish" />
+  				
 	  	</LinearLayout>
   	</ScrollView>
-  	
-  	<Button 
-  		android:id="@+id/finishButton"
-  		android:layout_width="100dip"
-  		android:layout_height="wrap_content"
-  		android:layout_above="@+id/linearbottom"
-  		android:layout_centerHorizontal="true"
-  		android:text="@string/finish"
-  	/>
-  	
-  	<LinearLayout 
-		android:id="@+id/linearbottom"
-		android:orientation="horizontal"
-		android:layout_width="match_parent"
-		android:layout_height="wrap_content"
-		android:layout_alignParentBottom="true"
-		android:gravity="center_horizontal"	>
-		<Button 
-			android:id="@+id/homeButton" 
-			android:layout_height="wrap_content" 
-			android:layout_width="85dip"
-			android:text="@string/home"/>		
-		<Button 
-			android:id="@+id/overviewButton" 
-			android:layout_height="wrap_content" 
-			android:layout_width="85dip"
-			android:text="@string/overview"/>
-		<Button 
-			android:id="@+id/groupButton" 
-			android:layout_height="wrap_content" 
-			android:layout_width="85dip"
-			android:text="@string/group"/>
-		</LinearLayout>
-  	
 </RelativeLayout>
 
 
