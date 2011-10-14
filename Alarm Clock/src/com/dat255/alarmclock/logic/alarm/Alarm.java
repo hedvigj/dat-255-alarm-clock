@@ -180,8 +180,10 @@ public class Alarm implements IAlarm {
 	public void onAlarmTriggered(Context context) {
 		disable();
 
-		for (IAlarmProperty property : properties) {
-			property.onAlarmTriggered(context);
+		if (properties != null) {
+			for (IAlarmProperty property : properties) {
+				property.onAlarmTriggered(context);
+			}
 		}
 	}
 

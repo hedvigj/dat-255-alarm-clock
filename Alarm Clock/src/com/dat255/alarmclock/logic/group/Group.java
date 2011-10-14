@@ -49,6 +49,42 @@ public class Group implements IGroup {
 	}
 
 	/**
+	 * Enables the group and all of it's alarms
+	 */
+	@Override
+	public void enable() {
+		for (IAlarm alarm : alarms) {
+			alarm.enable();
+		}
+	}
+
+	/**
+	 * Disables the group and all of it's alarms
+	 */
+	@Override
+	public void disable() {
+		for (IAlarm alarm : alarms) {
+			alarm.disable();
+		}
+	}
+
+	/**
+	 * Determines whether the group is enabled or not
+	 * 
+	 * @return true if enabled, otherwise false
+	 */
+	@Override
+	public boolean isEnabled() {
+		for (IAlarm alarm : alarms) {
+			if (alarm.isEnabled()) {
+				return true;
+			}
+		}
+
+		return false;
+	}
+
+	/**
 	 * Gets the alarms of this group
 	 * 
 	 * @return alarms the alarms

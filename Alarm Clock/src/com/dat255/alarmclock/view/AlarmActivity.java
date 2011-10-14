@@ -110,7 +110,7 @@ public class AlarmActivity extends Activity {
 
 			@Override
 			public void onClick(View v) {
-				createAlarm();
+				setAlarm();
 			}
 		});
 	}
@@ -128,7 +128,7 @@ public class AlarmActivity extends Activity {
 		updateViews();
 	}
 
-	private void createAlarm() {
+	private void setAlarm() {
 		IAlarm alarm;
 
 		if (!editMode) {
@@ -146,6 +146,7 @@ public class AlarmActivity extends Activity {
 
 		time.set(Calendar.HOUR_OF_DAY, timePicker.getCurrentHour());
 		time.set(Calendar.MINUTE, timePicker.getCurrentMinute());
+		time.set(Calendar.SECOND, 0);
 
 		if (time.getTimeInMillis() < currentMilliseconds) {
 			time.add(Calendar.HOUR_OF_DAY, 24);

@@ -23,6 +23,23 @@ public interface IGroup extends IEntity {
 	public void setName(String groupName);
 
 	/**
+	 * Enables the group and all of it's alarms
+	 */
+	public void enable();
+
+	/**
+	 * Disables the group and all of it's alarms
+	 */
+	public void disable();
+
+	/**
+	 * Determines whether the group is enabled or not
+	 * 
+	 * @return true if enabled, otherwise false
+	 */
+	public boolean isEnabled();
+
+	/**
 	 * Gets the alarms of this group
 	 * 
 	 * @return alarms the alarms
