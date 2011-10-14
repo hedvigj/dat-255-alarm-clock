@@ -125,6 +125,7 @@ public class GroupActivity extends ListActivity {
 			intent = new Intent(this, AlarmActivity.class);
 
 			intent.putExtra("alarmedit", false);
+			intent.putExtra("groupid", group.getId());
 
 			startActivity(intent);
 
