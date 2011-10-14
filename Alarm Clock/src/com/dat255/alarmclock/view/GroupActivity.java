@@ -5,6 +5,7 @@ import java.util.List;
 import android.app.ListActivity;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.view.Menu;
@@ -15,6 +16,8 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
+import android.widget.CheckedTextView;
+import android.widget.ListView;
 import android.widget.Toast;
 
 import com.dat255.alarmclock.R;
@@ -47,7 +50,22 @@ public class GroupActivity extends ListActivity {
 			names[i] = "Alarm " + alarms.get(i).getId();
 		}
 
-		setListAdapter(new ArrayAdapter<String>(this, R.layout.groupscreen_list_item, names));
+		setListAdapter(new ArrayAdapter<String>(this, R.layout.list_item, names));
+
+		ListView view = getListView();
+
+		for (int i = 0; i < view.getCount(); i++) {
+			view.setItemChecked(i, group.getAlarms().get(i).isEnabled());
+		}
+
+	}
+
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+
+		// Makes selecting multiple list items possible
+		getListView().setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
 	}
 
 	@Override
@@ -66,6 +84,8 @@ public class GroupActivity extends ListActivity {
 
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+				getListView().setItemChecked(position, group.getAlarms().get(position).isEnabled());
 
 				// Open the alarm activity to view this alarm
 				Intent intent = new Intent(context, AlarmActivity.class);
@@ -125,7 +145,7 @@ public class GroupActivity extends ListActivity {
 
 		MenuInflater inflater = getMenuInflater();
 
-		inflater.inflate(R.menu.deletemenu, menu);
+		inflater.inflate(R.menu.longpress_menu, menu);
 	}
 
 	/**
@@ -146,6 +166,25 @@ public class GroupActivity extends ListActivity {
 			AlarmManager.getInstance().removeAlarm(alarm);
 
 			fillListActivity();
+
+			return true;
+		case R.id.enable:
+			CheckedTextView chk = (CheckedTextView) info.targetView;
+			alarm = alarms.get((int) info.id);
+
+			alarm.enable();
+
+			chk.setChecked(alarm.isEnabled());
+
+			return true;
+
+		case R.id.disable:
+			chk = (CheckedTextView) info.targetView;
+			alarm = alarms.get((int) info.id);
+
+			alarm.disable();
+
+			chk.setChecked(alarm.isEnabled());
 
 			return true;
 		default:

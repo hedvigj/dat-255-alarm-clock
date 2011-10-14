@@ -7,6 +7,8 @@
     <string name="createalarm">Skapa alarm</string>
     <string name="creategroup">Skapa grupp</string>
     <string name="delete">Radera</string>
+    <string name="disable">Inaktivera</string>
+    <string name="enable">Aktivera</string>
     <string name="everyday">Alla dagar</string>
     <string name="finish">Klar</string>
     <string name="friday">Fredag</string>
