@@ -5,6 +5,9 @@ import android.content.Context;
 
 public class AlarmFactory {
 
+	private AlarmFactory() {
+	}
+
 	/**
 	 * Initializes a new alarm with a specific id
 	 * 
