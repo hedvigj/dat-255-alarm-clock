@@ -2,7 +2,6 @@ package com.dat255.alarmclock.view;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.os.PowerManager;
 import android.os.PowerManager.WakeLock;
@@ -21,8 +20,6 @@ public class TriggerActivity extends Activity implements OnClickListener {
 	private WakeLock wakeLock;
 	private Button snoozeButton;
 	private Button ignoreButton;
-	private IAlarm alarm = null;
-	private long alarmId;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -55,12 +52,20 @@ public class TriggerActivity extends Activity implements OnClickListener {
 		}
 
 		// Get the id of the alarm that triggered this screen
-		alarmId = getIntent().getLongExtra("alarmid", 0);
+		long alarmId = getIntent().getLongExtra("alarmid", 0);
 
-		alarm = AlarmManager.getInstance().findAlarmById(alarmId);
+		IAlarm alarm = AlarmManager.getInstance().findAlarmById(alarmId);
 
 		alarm.onAlarmTriggered(this);
 
+		// Is the alarm not visible to the user?
+		if (alarm.getVisible() == false) {
+			// The alarm is a result of the user wanting to snooze, and thus
+			// temporary
+			AlarmManager.getInstance().removeAlarm(alarm);
+		}
+
+		// Show debug text
 		Toast.makeText(this, "Alarm triggered: " + alarmId, Toast.LENGTH_LONG).show();
 
 		// Prevent the phone from sleeping
@@ -79,15 +84,27 @@ public class TriggerActivity extends Activity implements OnClickListener {
 		switch (view.getId()) {
 		case R.id.snoozeButton:
 			Sound.getInstance().soundStop();
-			Toast.makeText(this, "Alarm will ring again in 1 min", Toast.LENGTH_LONG).show();
-			alarm.snooze(1);
+
+			// Create an invisible snooze alarm
+			IAlarm snoozeAlarm = AlarmManager.getInstance().createAlarm(getApplicationContext(), TriggerActivity.class);
+
+			snoozeAlarm.setVisible(false);
+
+			snoozeAlarm.snooze(1);
+
+			snoozeAlarm.enable();
+
+			// Notify the user
+			Toast.makeText(this, "Alarm will sound again in 1 min", Toast.LENGTH_LONG).show();
+
 			break;
 		case R.id.ignoreButton:
-			alarm.disable();
 			Sound.getInstance().soundStop();
-			Intent i = new Intent(this, HomeActivity.class);
-			startActivity(i);
+
+			break;
 		}
 
+		// Close the activity for now
+		finish();
 	}
 }

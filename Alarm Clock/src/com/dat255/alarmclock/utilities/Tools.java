@@ -53,8 +53,10 @@ public class Tools {
 	 *            the current context
 	 * @param nextActivityClass
 	 *            the class of the Activity to launch upon click
+	 * 
+	 * @return the success of the operation, true if nothing unexpected occurs
 	 */
-	public static void createOnClickLauncher(View view, final Context context, final Class<? extends Activity> nextActivityClass) {
+	public static boolean createOnClickLauncher(View view, final Context context, final Class<? extends Activity> nextActivityClass) {
 
 		view.setOnClickListener(new OnClickListener() {
 			@Override
@@ -63,5 +65,7 @@ public class Tools {
 				context.startActivity(i);
 			}
 		});
+
+		return true;
 	}
 }

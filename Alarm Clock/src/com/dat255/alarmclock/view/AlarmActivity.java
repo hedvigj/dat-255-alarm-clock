@@ -3,7 +3,6 @@ package com.dat255.alarmclock.view;
 import java.util.Calendar;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -156,13 +155,11 @@ public class AlarmActivity extends Activity implements OnClickListener {
 		// Enable the alarm
 		alarm.enable();
 
-		int hoursUntilTriggered = (int) ((time.getTimeInMillis() - currentMilliseconds) / (1000 * 3600));
+		long hoursUntilTriggered = (time.getTimeInMillis() - currentMilliseconds) / (1000 * 3600);
+		long minutesUntilTriggered = (time.getTimeInMillis() - currentMilliseconds) / (1000 * 60) - hoursUntilTriggered * 60;
 
-		Toast.makeText(
-				this,
-				"Alarm set to sound in " + hoursUntilTriggered + " hours and "
-						+ (((time.getTimeInMillis() - currentMilliseconds) / (1000 * 60)) - hoursUntilTriggered * 60) + " minutes.",
-				Toast.LENGTH_SHORT).show();
+		Toast.makeText(this, "Alarm set to sound in " + hoursUntilTriggered + " hours and " + minutesUntilTriggered + " minutes.",
+				Toast.LENGTH_LONG).show();
 	}
 
 	private void updateViews() {
@@ -180,7 +177,8 @@ public class AlarmActivity extends Activity implements OnClickListener {
 	@Override
 	public void onClick(View v) {
 		setAlarm();
-		Intent i = new Intent(this, GroupActivity.class);
-		startActivity(i);
+
+		// Close the activity for now
+		finish();
 	}
 }
