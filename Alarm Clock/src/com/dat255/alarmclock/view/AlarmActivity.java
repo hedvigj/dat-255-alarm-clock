@@ -158,8 +158,11 @@ public class AlarmActivity extends Activity implements OnClickListener {
 		long hoursUntilTriggered = (time.getTimeInMillis() - currentMilliseconds) / (1000 * 3600);
 		long minutesUntilTriggered = (time.getTimeInMillis() - currentMilliseconds) / (1000 * 60) - hoursUntilTriggered * 60;
 
-		Toast.makeText(this, "Alarm set to sound in " + hoursUntilTriggered + " hours and " + minutesUntilTriggered + " minutes.",
-				Toast.LENGTH_LONG).show();
+		Toast.makeText(
+				this,
+				getString(R.string.alarm_set_to) + " " + hoursUntilTriggered + " " + getString(R.string.hours) + " "
+						+ getString(R.string.and) + " " + minutesUntilTriggered + " " + getString(R.string.minutes), Toast.LENGTH_LONG)
+				.show();
 	}
 
 	private void updateViews() {

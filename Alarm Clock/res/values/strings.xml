@@ -2,7 +2,9 @@
 <resources>
     <string name="app_name">Alarm Clock</string>
     <string name="alarm">Alarm</string>
+    <string name="alarm_set_to">Alarmet kommer ringa om</string>
     <string name="alarms">Alarm</string>
+    <string name="and">och</string>
     <string name ="cancel">Stäng</string>
     <string name="createalarm">Skapa alarm</string>
     <string name="creategroup">Skapa grupp</string>
@@ -14,8 +16,10 @@
     <string name="friday">Fredag</string>
     <string name="group">Grupp</string>
     <string name="groups">Grupper</string>
-    <string name="ignore">Ignore</string>
     <string name="home">Hem</string>
+    <string name="hours">timmar</string>
+    <string name="ignore">Ignore</string>
+    <string name="minutes">minuter</string>
     <string name="monday">Måndag</string>
 	<string name ="namedialog">Namnge grupp</string>
     <string name ="ok">Ok</string>
@@ -25,6 +29,7 @@
     <string name="saturday">Lördag</string>
     <string name="sleepwarning">Sömnvarning</string>
     <string name="snooze">Snooze</string>
+    <string name="snooze_message">Alarmet kommer ringa igen om</string>
     <string name="sunday">Söndag</string>
     <string name="thursday">Torsdag</string>
     <string name="tuesday">Tisdag</string>

@@ -98,7 +98,8 @@ public class TriggerActivity extends Activity implements OnClickListener {
 			snoozeAlarm.enable();
 
 			// Notify the user
-			Toast.makeText(this, "Alarm will sound again in 1 min", Toast.LENGTH_LONG).show();
+			Toast.makeText(this, getString(R.string.snooze_message) + " " + 1 + " " + getString(R.string.minutes), Toast.LENGTH_LONG)
+					.show();
 
 			break;
 		case R.id.ignoreButton:
