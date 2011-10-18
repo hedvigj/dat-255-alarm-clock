@@ -156,7 +156,12 @@ public class AlarmActivity extends Activity implements OnClickListener {
 		// Enable the alarm
 		alarm.enable();
 
-		Toast.makeText(this, "Alarm set to sound in " + (time.getTimeInMillis() - currentMilliseconds) / (1000 * 60) + " minutes.",
+		int hoursUntilTriggered = (int) ((time.getTimeInMillis() - currentMilliseconds) / (1000 * 3600));
+
+		Toast.makeText(
+				this,
+				"Alarm set to sound in " + hoursUntilTriggered + " hours and "
+						+ (((time.getTimeInMillis() - currentMilliseconds) / (1000 * 60)) - hoursUntilTriggered * 60) + " minutes.",
 				Toast.LENGTH_SHORT).show();
 	}
 
