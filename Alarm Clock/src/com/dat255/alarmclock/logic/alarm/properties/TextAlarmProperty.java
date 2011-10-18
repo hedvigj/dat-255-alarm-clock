@@ -22,4 +22,10 @@ public class TextAlarmProperty implements IAlarmProperty {
 		// TODO Auto-generated method stub
 	}
 
+	@Override
+	public void onAlarmStopped(Context context) {
+		// TODO Auto-generated method stub
+
+	}
+
 }

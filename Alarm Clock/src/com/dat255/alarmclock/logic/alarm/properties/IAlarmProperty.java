@@ -22,4 +22,12 @@ public interface IAlarmProperty {
 	 */
 	public void onAlarmTriggered(Context context);
 
+	/**
+	 * Occurs when the parent alarm is stopped
+	 * 
+	 * @param context
+	 *            the context in which the alarm is stopped
+	 */
+	public void onAlarmStopped(Context context);
+
 }

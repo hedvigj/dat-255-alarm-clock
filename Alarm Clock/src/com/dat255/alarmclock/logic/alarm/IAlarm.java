@@ -60,6 +60,14 @@ public interface IAlarm extends IEntity {
 	public void onAlarmTriggered(Context context);
 
 	/**
+	 * Occurs when the alarm is stopped
+	 * 
+	 * @param context
+	 *            the context in which the alarm is stopped
+	 */
+	public void onAlarmStopped(Context context);
+
+	/**
 	 * Sets the trigger time of the alarm a number of minutes into the future.
 	 * Remember that this call changes the trigger time of the alarm and thus
 	 * should not be used when the user expects his/her input time to apply.

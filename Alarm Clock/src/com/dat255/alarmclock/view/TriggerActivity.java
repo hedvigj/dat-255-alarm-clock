@@ -21,6 +21,8 @@ public class TriggerActivity extends Activity implements OnClickListener {
 	private Button snoozeButton;
 	private Button ignoreButton;
 
+	private IAlarm alarm;
+
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -54,8 +56,9 @@ public class TriggerActivity extends Activity implements OnClickListener {
 		// Get the id of the alarm that triggered this screen
 		long alarmId = getIntent().getLongExtra("alarmid", 0);
 
-		IAlarm alarm = AlarmManager.getInstance().findAlarmById(alarmId);
+		alarm = AlarmManager.getInstance().findAlarmById(alarmId);
 
+		// Trigger the alarm
 		alarm.onAlarmTriggered(this);
 
 		// Is the alarm not visible to the user?
@@ -103,6 +106,9 @@ public class TriggerActivity extends Activity implements OnClickListener {
 
 			break;
 		}
+
+		// Stop the alarm
+		alarm.onAlarmStopped(this);
 
 		// Close the activity for now
 		finish();

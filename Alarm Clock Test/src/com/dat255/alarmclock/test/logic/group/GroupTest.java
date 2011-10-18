@@ -65,6 +65,12 @@ public class GroupTest extends AndroidTestCase {
 
 		}
 
+		@Override
+		public void onAlarmStopped(Context context) {
+			// TODO Auto-generated method stub
+
+		}
+
 	}
 
 	@Override

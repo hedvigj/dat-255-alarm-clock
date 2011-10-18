@@ -34,6 +34,17 @@ public class AlarmManager {
 	}
 
 	/**
+	 * Removes all alarms and frees up all occupied alarm ids
+	 */
+	public void clear() {
+		for (IAlarm alarm : map.values()) {
+			alarm.disable();
+		}
+
+		map.clear();
+	}
+
+	/**
 	 * Creates a new alarm. Always use this method for instantiating alarm
 	 * objects.
 	 * 
@@ -76,6 +87,11 @@ public class AlarmManager {
 		return map.get(id);
 	}
 
+	/**
+	 * Gets all alarm instances in this alarm manager
+	 * 
+	 * @return all alarms
+	 */
 	public List<IAlarm> getAlarms() {
 		List<IAlarm> output = new ArrayList<IAlarm>();
 

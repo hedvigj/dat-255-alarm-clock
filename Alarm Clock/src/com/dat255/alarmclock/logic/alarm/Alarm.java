@@ -188,6 +188,21 @@ public class Alarm implements IAlarm {
 	}
 
 	/**
+	 * Occurs when the alarm is stopped
+	 * 
+	 * @param context
+	 *            the context in which the alarm is stopped
+	 */
+	@Override
+	public void onAlarmStopped(Context context) {
+		if (properties != null) {
+			for (IAlarmProperty property : properties) {
+				property.onAlarmStopped(context);
+			}
+		}
+	}
+
+	/**
 	 * Sets the properties of this alarm
 	 * 
 	 * @param properties
