@@ -1,4 +1,5 @@
 package com.dat255.alarmclock.test.logic.alarm;
+
 import java.util.Calendar;
 
 import android.test.AndroidTestCase;
@@ -85,12 +86,9 @@ public class AlarmTest extends AndroidTestCase {
 
 	public void testSnooze() {
 		// No exceptions should be casted
-		int m = 1;
-		int m2 = -2;
-		int m3 = 65;
-		alarm.snooze(m);
-		alarm.snooze(m2);
-		alarm.snooze(m3);
+		alarm.snooze(1);
+		alarm.snooze(-2);
+		alarm.snooze(65);
 
 		// See that snooze time is the same as triggered time
 		int m4 = 23;
@@ -99,7 +97,8 @@ public class AlarmTest extends AndroidTestCase {
 		current.add(Calendar.MINUTE, m4);
 
 		alarm.snooze(m4);
-		if (alarm.getTriggerTime() != current.getTimeInMillis()) {
+		// Triggered time should be within a secund
+		if (Math.abs(alarm.getTriggerTime() - current.getTimeInMillis()) > 1000) {
 			fail("TriggerTime not the same as snooze input");
 		}
 	}
