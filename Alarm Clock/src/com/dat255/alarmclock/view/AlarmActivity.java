@@ -160,7 +160,7 @@ public class AlarmActivity extends Activity implements OnClickListener {
 
 		Toast.makeText(
 				this,
-				getString(R.string.alarm_set_to) + " " + hoursUntilTriggered + " " + getString(R.string.hours) + " "
+				getString(R.string.alarm_set_to) + "\n" + hoursUntilTriggered + " " + getString(R.string.hours) + " "
 						+ getString(R.string.and) + " " + minutesUntilTriggered + " " + getString(R.string.minutes), Toast.LENGTH_LONG)
 				.show();
 	}

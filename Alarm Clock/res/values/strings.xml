@@ -22,6 +22,7 @@
     <string name="minutes">minuter</string>
     <string name="monday">Måndag</string>
 	<string name ="namedialog">Namnge grupp</string>
+	<string name ="not_available">Ej tillgänglig</string>
     <string name ="ok">Ok</string>
     <string name="overview">Översikt</string>
     <string name="overview_screen">OverviewScreen</string>

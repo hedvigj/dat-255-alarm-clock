@@ -5,6 +5,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.os.PowerManager;
 import android.os.PowerManager.WakeLock;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -114,4 +115,15 @@ public class TriggerActivity extends Activity implements OnClickListener {
 		// Close the activity for now
 		finish();
 	}
+
+	@Override
+	public boolean onKeyDown(final int keyCode, final KeyEvent event) {
+
+		if (keyCode == KeyEvent.KEYCODE_BACK) {
+			Toast.makeText(TriggerActivity.this, R.string.not_available, Toast.LENGTH_SHORT).show();
+		}
+
+		return true;
+	}
+
 }
