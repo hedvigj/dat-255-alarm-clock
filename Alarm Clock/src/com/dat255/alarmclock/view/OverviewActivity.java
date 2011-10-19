@@ -158,7 +158,7 @@ public class OverviewActivity extends ListActivity {
 
 		MenuInflater inflater = getMenuInflater();
 
-		inflater.inflate(R.menu.longpress_menu, menu);
+		inflater.inflate(R.menu.overview_longpress_menu, menu);
 
 		AdapterContextMenuInfo info = (AdapterContextMenuInfo) menuInfo;
 

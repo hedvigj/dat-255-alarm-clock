@@ -144,7 +144,7 @@ public class GroupActivity extends ListActivity {
 
 		MenuInflater inflater = getMenuInflater();
 
-		inflater.inflate(R.menu.longpress_menu, menu);
+		inflater.inflate(R.menu.group_longpress_menu, menu);
 
 		AdapterContextMenuInfo info = (AdapterContextMenuInfo) menuInfo;
 
