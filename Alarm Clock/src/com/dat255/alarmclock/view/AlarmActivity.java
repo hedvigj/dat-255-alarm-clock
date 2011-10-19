@@ -1,5 +1,6 @@
 package com.dat255.alarmclock.view;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 
 import android.app.Activity;
@@ -20,6 +21,7 @@ import com.dat255.alarmclock.logic.alarm.AlarmManager;
 import com.dat255.alarmclock.logic.alarm.IAlarm;
 import com.dat255.alarmclock.logic.alarm.properties.IAlarmProperty;
 import com.dat255.alarmclock.logic.alarm.properties.SoundProperty;
+import com.dat255.alarmclock.logic.alarm.properties.VibrationProperty;
 import com.dat255.alarmclock.logic.group.GroupManager;
 
 public class AlarmActivity extends Activity implements OnClickListener {
@@ -155,11 +157,25 @@ public class AlarmActivity extends Activity implements OnClickListener {
 		alarm.setTriggerTime(time.getTimeInMillis());
 
 		// Set alarm properties
-		IAlarmProperty[] properties = new IAlarmProperty[1];
+		ArrayList<IAlarmProperty> properties = new ArrayList<IAlarmProperty>();
 
-		properties[0] = new SoundProperty();
+		// Set the vibration and sound properties according to their respective
+		// checkboxes
+		CheckBox soundCheck = (CheckBox) findViewById(R.id.soundCheckBox);
+		CheckBox vibrationCheck = (CheckBox) findViewById(R.id.vibrationCheckBox);
 
-		alarm.setProperties(properties);
+		if (soundCheck.isChecked()) {
+			properties.add(new SoundProperty());
+		}
+		if (vibrationCheck.isChecked()) {
+			properties.add(new VibrationProperty());
+		}
+
+		IAlarmProperty[] array = new IAlarmProperty[properties.size()];
+
+		properties.toArray(array);
+
+		alarm.setProperties(array);
 
 		// Enable the alarm
 		alarm.enable();

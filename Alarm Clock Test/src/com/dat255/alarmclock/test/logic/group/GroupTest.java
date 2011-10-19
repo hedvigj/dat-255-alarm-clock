@@ -6,6 +6,7 @@ import android.content.Context;
 import android.test.AndroidTestCase;
 
 import com.dat255.alarmclock.logic.alarm.IAlarm;
+import com.dat255.alarmclock.logic.alarm.properties.IAlarmProperty;
 import com.dat255.alarmclock.logic.group.Group;
 
 public class GroupTest extends AndroidTestCase {
@@ -69,6 +70,18 @@ public class GroupTest extends AndroidTestCase {
 		public void onAlarmStopped(Context context) {
 			// TODO Auto-generated method stub
 
+		}
+
+		@Override
+		public void setProperties(IAlarmProperty[] properties) {
+			// TODO Auto-generated method stub
+
+		}
+
+		@Override
+		public IAlarmProperty[] getProperties() {
+			// TODO Auto-generated method stub
+			return null;
 		}
 
 	}

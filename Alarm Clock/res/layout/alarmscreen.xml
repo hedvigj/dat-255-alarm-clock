@@ -90,12 +90,18 @@
 		  	</LinearLayout>
 		  		
 		  	<CheckBox 
-		  		android:text="@string/sleepwarning"
-		  		android:id="@+id/sleepwarningCheckBox" 
+		  		android:text="@string/sound"
+		  		android:id="@+id/soundCheckBox" 
 		  		android:layout_height="wrap_content" 
-		  		android:layout_width="wrap_content" 
-		  		android:layout_marginBottom="50dip"
-		  		/>	
+		  		android:layout_width="wrap_content"
+		  		android:checked="true"/>	
+		  	<CheckBox 
+		  		android:text="@string/vibration"
+		  		android:id="@+id/vibrationCheckBox" 
+		  		android:layout_height="wrap_content" 
+		  		android:layout_width="wrap_content"
+		  		android:checked="true"/>		
+		  		
 	  	</LinearLayout>
   	</ScrollView>
   	<LinearLayout 

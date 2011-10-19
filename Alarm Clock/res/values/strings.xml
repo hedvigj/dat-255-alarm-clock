@@ -31,8 +31,10 @@
     <string name="sleepwarning">Sömnvarning</string>
     <string name="snooze">Snooze</string>
     <string name="snooze_message">Alarmet kommer ringa igen om</string>
+    <string name="sound">Ljud</string>
     <string name="sunday">Söndag</string>
     <string name="thursday">Torsdag</string>
     <string name="tuesday">Tisdag</string>
+    <string name="vibration">Vibration</string>
     <string name="wednesday">Onsdag</string>
 </resources>

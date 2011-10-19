@@ -21,27 +21,6 @@ public class HomeActivity extends Activity {
 		Button overviewButton = (Button) findViewById(R.id.overviewButton);
 		Tools.createOnClickLauncher(overviewButton, HomeActivity.this, OverviewActivity.class);
 
-		// Setup some test alarms! Remove in the future!
-		/*
-		 * IGroup group = GroupManager.getInstance().createGroup();
-		 * 
-		 * group.setName("Skola-gruppen");
-		 * 
-		 * for (int i = 0; i < 2; i++) { IAlarm alarm =
-		 * AlarmManager.getInstance().createAlarm(getApplicationContext(),
-		 * TriggerActivity.class);
-		 * 
-		 * Calendar c = Calendar.getInstance(); c.add(Calendar.MINUTE, i + 1);
-		 * alarm.setTriggerTime(c.getTimeInMillis());
-		 * 
-		 * alarm.enable();
-		 * 
-		 * group.addAlarmToGroup(alarm); }
-		 * 
-		 * IGroup group2 = GroupManager.getInstance().createGroup();
-		 * 
-		 * group2.setName("Jobb-gruppen");
-		 */
 	}
 
 	@Override

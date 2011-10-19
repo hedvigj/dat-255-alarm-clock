@@ -12,7 +12,8 @@ public class AlarmActivityTest extends ActivityInstrumentationTestCase2<AlarmAct
 	private AlarmActivity activity;
 	private View alarmTimePicker;
 	private CheckBox repeatCheckBox;
-	private CheckBox sleepwarningCheckBox;
+	private CheckBox soundCheckBox;
+	private CheckBox vibrationCheckBox;
 	private Button finishButton;
 
 	public AlarmActivityTest() {
@@ -25,14 +26,16 @@ public class AlarmActivityTest extends ActivityInstrumentationTestCase2<AlarmAct
 		activity = this.getActivity();
 		alarmTimePicker = activity.findViewById(com.dat255.alarmclock.R.id.alarmtimepicker);
 		repeatCheckBox = (CheckBox) activity.findViewById(com.dat255.alarmclock.R.id.repeatCheckBox);
-		sleepwarningCheckBox = (CheckBox) activity.findViewById(com.dat255.alarmclock.R.id.sleepwarningCheckBox);
+		soundCheckBox = (CheckBox) activity.findViewById(com.dat255.alarmclock.R.id.soundCheckBox);
+		vibrationCheckBox = (CheckBox) activity.findViewById(com.dat255.alarmclock.R.id.vibrationCheckBox);
 		finishButton = (Button) activity.findViewById(com.dat255.alarmclock.R.id.finishButton);
 	}
 
 	public void testPrecondition() {
 		assertNotNull(alarmTimePicker);
 		assertNotNull(repeatCheckBox);
-		assertNotNull(sleepwarningCheckBox);
+		assertNotNull(soundCheckBox);
+		assertNotNull(vibrationCheckBox);
 		assertNotNull(finishButton);
 	}
 }
