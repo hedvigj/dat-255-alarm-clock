@@ -225,6 +225,42 @@ public class OverviewActivity extends ListActivity {
 			updateCheckBoxes();
 
 			return true;
+		case R.id.change:
+
+			// Creates input dialog
+			final IGroup g = groups.get((int) info.id);
+			AlertDialog.Builder alert = new AlertDialog.Builder(this);
+			final EditText input = new EditText(this);
+			alert.setMessage(R.string.namedialog);
+			alert.setView(input);
+			alert.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+
+				@Override
+				public void onClick(DialogInterface dialog, int button) {
+					String s = input.getText().toString().trim();
+
+					if (s.equals("")) {
+						dialog.cancel();
+					} else {
+						// Change group name
+						g.setName(s);
+
+						fillListActivity();
+					}
+				}
+
+			});
+
+			alert.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
+
+				@Override
+				public void onClick(DialogInterface dialog, int button) {
+					dialog.cancel();
+				}
+			});
+
+			alert.show();
+
 		default:
 			return super.onContextItemSelected(item);
 		}

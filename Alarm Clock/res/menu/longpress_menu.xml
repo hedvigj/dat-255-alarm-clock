@@ -9,4 +9,7 @@
 	<item 
 		android:id="@+id/disable"
 		android:title="@string/disable"/>
+	<item 
+		android:id="@+id/change"
+		android:title="@string/change"/>
 </menu>
