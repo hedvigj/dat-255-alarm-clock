@@ -12,6 +12,7 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.LinearLayout;
+import android.widget.RadioButton;
 import android.widget.TimePicker;
 import android.widget.TimePicker.OnTimeChangedListener;
 
@@ -19,6 +20,7 @@ import com.dat255.alarmclock.R;
 import com.dat255.alarmclock.logic.alarm.AlarmManager;
 import com.dat255.alarmclock.logic.alarm.IAlarm;
 import com.dat255.alarmclock.logic.alarm.properties.IAlarmProperty;
+import com.dat255.alarmclock.logic.alarm.properties.RepeatProperty;
 import com.dat255.alarmclock.logic.alarm.properties.SoundProperty;
 import com.dat255.alarmclock.logic.alarm.properties.VibrationProperty;
 import com.dat255.alarmclock.logic.group.GroupManager;
@@ -31,6 +33,7 @@ public class AlarmActivity extends Activity implements OnClickListener {
 	private long groupId;
 
 	private TimePicker timePicker;
+	private RadioButton[] repeatWeekdays;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -72,45 +75,16 @@ public class AlarmActivity extends Activity implements OnClickListener {
 			}
 		});
 
-		final CheckBox checkEveryday = (CheckBox) findViewById(R.id.checkEveryday);
+		repeatWeekdays = new RadioButton[7];
 
-		final CheckBox[] repeatWeekdays = new CheckBox[7];
-		repeatWeekdays[0] = (CheckBox) findViewById(R.id.checkMonday);
-		repeatWeekdays[1] = (CheckBox) findViewById(R.id.checkTuesday);
-		repeatWeekdays[2] = (CheckBox) findViewById(R.id.checkWednesday);
-		repeatWeekdays[3] = (CheckBox) findViewById(R.id.checkThursday);
-		repeatWeekdays[4] = (CheckBox) findViewById(R.id.checkFriday);
-		repeatWeekdays[5] = (CheckBox) findViewById(R.id.checkSaturday);
-		repeatWeekdays[6] = (CheckBox) findViewById(R.id.checkSunday);
+		repeatWeekdays[0] = (RadioButton) findViewById(R.id.radioSunday);
+		repeatWeekdays[1] = (RadioButton) findViewById(R.id.radioMonday);
+		repeatWeekdays[2] = (RadioButton) findViewById(R.id.radioTuesday);
+		repeatWeekdays[3] = (RadioButton) findViewById(R.id.radioWednesday);
+		repeatWeekdays[4] = (RadioButton) findViewById(R.id.radioThursday);
+		repeatWeekdays[5] = (RadioButton) findViewById(R.id.radioFriday);
+		repeatWeekdays[6] = (RadioButton) findViewById(R.id.radioSaturday);
 
-		// Sets all weekdays to the same check status as the checkEveryday
-		// CheckBox
-		checkEveryday.setOnCheckedChangeListener(new OnCheckedChangeListener() {
-
-			@Override
-			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-				if (isChecked) {
-					for (CheckBox c : repeatWeekdays) {
-						c.setChecked(true);
-					}
-				}
-			}
-		});
-
-		// If any one of the weekdays is unchecked, all weekdays are no longer
-		// checked and the checkEveryday checkbox will be unchecked
-		for (CheckBox c : repeatWeekdays) {
-			c.setOnCheckedChangeListener(new OnCheckedChangeListener() {
-
-				@Override
-				public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-					if (!isChecked) {
-						checkEveryday.setChecked(false);
-					}
-				}
-			});
-
-		}
 	}
 
 	@Override
@@ -124,8 +98,6 @@ public class AlarmActivity extends Activity implements OnClickListener {
 
 		groupId = getIntent().getLongExtra("groupid", 0);
 
-		// If in edit mode, adjust the views to match the alarm
-		updateViews();
 	}
 
 	private void setAlarm() {
@@ -169,6 +141,15 @@ public class AlarmActivity extends Activity implements OnClickListener {
 			properties.add(new VibrationProperty());
 		}
 
+		final int[] weekdays = { Calendar.SUNDAY, Calendar.MONDAY, Calendar.TUESDAY, Calendar.WEDNESDAY, Calendar.THURSDAY,
+				Calendar.FRIDAY, Calendar.SATURDAY };
+		for (int i = 0; i < 7; i++) {
+			if (repeatWeekdays[i].isChecked()) {
+				properties.add(new RepeatProperty(weekdays[i]));
+			}
+
+		}
+
 		IAlarmProperty[] array = new IAlarmProperty[properties.size()];
 		properties.toArray(array);
 		alarm.setProperties(array);
@@ -178,18 +159,6 @@ public class AlarmActivity extends Activity implements OnClickListener {
 
 		// Notify the user on when the alarm will sound
 		Tools.showAlarmCountdownToast(this, alarm);
-	}
-
-	private void updateViews() {
-		if (editMode) {
-			IAlarm alarm = AlarmManager.getInstance().findAlarmById(alarmId);
-
-			Calendar alarmTime = Calendar.getInstance();
-			alarmTime.setTimeInMillis(alarm.getTriggerTime());
-
-			timePicker.setCurrentHour(alarmTime.get(Calendar.HOUR_OF_DAY));
-			timePicker.setCurrentMinute(alarmTime.get(Calendar.MINUTE));
-		}
 	}
 
 	@Override

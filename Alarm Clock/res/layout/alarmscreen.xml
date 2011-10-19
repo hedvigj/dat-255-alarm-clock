@@ -39,54 +39,52 @@
 		  		android:orientation="vertical"
 		  		android:gravity="center">
 		  		
-		  		<CheckBox
-			  		android:text="@string/everyday"
-			  		android:layout_height="wrap_content" 
-			  		android:layout_width="250dip" 
-			  		android:id="@+id/checkEveryday" />
-		  		
-		  		<CheckBox
-			  		android:text="@string/monday"
-			  		android:layout_height="wrap_content" 
-			  		android:layout_width="250dip" 
-			  		android:id="@+id/checkMonday" />
-			  	
-		  		<CheckBox
-			  		android:text="@string/tuesday"
-			  		android:layout_height="wrap_content" 
-			  		android:layout_width="250dip" 
-			  		android:id="@+id/checkTuesday" />
-			  		
-		  		<CheckBox
-			  		android:text="@string/wednesday"
-			  		android:layout_height="wrap_content" 
-			  		android:layout_width="250dip" 
-			  		android:id="@+id/checkWednesday" />
-			  		
-		  		<CheckBox
-			  		android:text="@string/thursday"
-			  		android:layout_height="wrap_content" 
-			  		android:layout_width="250dip" 
-			  		android:id="@+id/checkThursday" />
-			  		
-		  		<CheckBox
-			  		android:text="@string/friday"
-			  		android:layout_height="wrap_content" 
-			  		android:layout_width="250dip" 
-			  		android:id="@+id/checkFriday" />
-			  		
-		  		<CheckBox
-			  		android:text="@string/saturday"
-			  		android:layout_height="wrap_content" 
-			  		android:layout_width="250dip" 
-			  		android:id="@+id/checkSaturday" />
-			  		
-		  		<CheckBox
-			  		android:text="@string/sunday"
-			  		android:layout_height="wrap_content" 
-			  		android:layout_width="250dip" 
-			  		android:id="@+id/checkSunday" />
-		  		
+			  	<RadioGroup
+			  		android:id="@+id/weekdayRadioGroup"
+			  		android:layout_width="250dip"
+		  			android:layout_height="wrap_content">
+			  		<RadioButton
+				  		android:text="@string/monday"
+				  		android:layout_height="wrap_content" 
+				  		android:layout_width="250dip" 
+				  		android:id="@+id/radioMonday" />
+				  	
+			  		<RadioButton
+				  		android:text="@string/tuesday"
+				  		android:layout_height="wrap_content" 
+				  		android:layout_width="250dip" 
+				  		android:id="@+id/radioTuesday" />
+				  		
+			  		<RadioButton
+				  		android:text="@string/wednesday"
+				  		android:layout_height="wrap_content" 
+				  		android:layout_width="250dip" 
+				  		android:id="@+id/radioWednesday" />
+				  		
+			  		<RadioButton
+				  		android:text="@string/thursday"
+				  		android:layout_height="wrap_content" 
+				  		android:layout_width="250dip" 
+				  		android:id="@+id/radioThursday" />
+				  		
+			  		<RadioButton
+				  		android:text="@string/friday"
+				  		android:layout_height="wrap_content" 
+				  		android:layout_width="250dip" 
+				  		android:id="@+id/radioFriday" />
+				  		
+			  		<RadioButton
+				  		android:text="@string/saturday"
+				  		android:layout_height="wrap_content" 
+				  		android:layout_width="250dip" 
+				  		android:id="@+id/radioSaturday" />
+				  		
+			  		<RadioButton
+				  		android:text="@string/sunday"
+				  		android:layout_height="wrap_content" 
+				  		android:layout_width="250dip" 
+				  		android:id="@+id/radioSunday" />
+			  	</RadioGroup>
 		  	</LinearLayout>
 		  		
 		  	<CheckBox 
