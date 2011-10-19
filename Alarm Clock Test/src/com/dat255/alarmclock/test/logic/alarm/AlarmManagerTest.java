@@ -1,5 +1,7 @@
 package com.dat255.alarmclock.test.logic.alarm;
 
+import java.util.List;
+
 import android.test.AndroidTestCase;
 
 import com.dat255.alarmclock.logic.alarm.AlarmManager;
@@ -75,14 +77,20 @@ public class AlarmManagerTest extends AndroidTestCase {
 	}
 
 	/**
-	 * Should not generate any errors
+	 * Test if getAlarm() returns created alarms
 	 */
 
 	public void testGetAlarms() {
 
-		// TODO
+		instance.clear();
 
-		instance.getAlarms();
+		IAlarm a = instance.createAlarm(getContext(), TriggerActivity.class);
+
+		List<IAlarm> alarms = instance.getAlarms();
+
+		if (alarms.contains(a) != true) {
+			fail("Test does not get created alarm");
+		}
 
 	}
 }

@@ -23,7 +23,6 @@ public class HomeActivityTest extends ActivityInstrumentationTestCase2<HomeActiv
 		activity = getActivity();
 		overviewButton = (Button) activity.findViewById(com.dat255.alarmclock.R.id.overviewButton);
 		currentTime = activity.findViewById(com.dat255.alarmclock.R.id.current_time);
-
 	}
 
 	public void testPrecondition() {

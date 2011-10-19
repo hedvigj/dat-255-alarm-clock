@@ -27,7 +27,7 @@ public class GroupManagerTest extends AndroidTestCase {
 	}
 
 	public void testCreateGroup() {
-		// test that you can create groups without geting any errors
+		// test that you can create groups without getting any errors
 		for (int i = 0; i < 100; i++) {
 			gm.createGroup();
 		}
