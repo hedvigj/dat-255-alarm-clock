@@ -16,7 +16,6 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
-import android.widget.CheckedTextView;
 import android.widget.ListView;
 
 import com.dat255.alarmclock.R;
@@ -24,6 +23,7 @@ import com.dat255.alarmclock.logic.alarm.AlarmManager;
 import com.dat255.alarmclock.logic.alarm.IAlarm;
 import com.dat255.alarmclock.logic.group.GroupManager;
 import com.dat255.alarmclock.logic.group.IGroup;
+import com.dat255.alarmclock.utilities.Tools;
 
 public class GroupActivity extends ListActivity {
 
@@ -177,17 +177,17 @@ public class GroupActivity extends ListActivity {
 
 			return true;
 		case R.id.enable:
-			CheckedTextView chk = (CheckedTextView) info.targetView;
 			alarm = alarms.get((int) info.id);
 
 			alarm.enable();
+
+			Tools.showAlarmCountdownToast(this, alarm);
 
 			updateCheckBoxes();
 
 			return true;
 
 		case R.id.disable:
-			chk = (CheckedTextView) info.targetView;
 			alarm = alarms.get((int) info.id);
 
 			alarm.disable();

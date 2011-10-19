@@ -5,6 +5,7 @@ import java.util.Calendar;
 import android.content.Context;
 
 import com.dat255.alarmclock.logic.alarm.IAlarm;
+import com.dat255.alarmclock.utilities.Tools;
 
 public class RepeatProperty implements IAlarmProperty {
 
@@ -79,6 +80,8 @@ public class RepeatProperty implements IAlarmProperty {
 	public void onAlarmStopped(Context context) {
 		// The alarm was stopped, re-enable it and make it sound in a week
 		setAlarm.enable();
+
+		Tools.showAlarmCountdownToast(context, setAlarm);
 	}
 
 	/**

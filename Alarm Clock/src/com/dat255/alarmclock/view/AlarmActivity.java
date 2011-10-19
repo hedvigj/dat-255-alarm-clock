@@ -14,7 +14,6 @@ import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.LinearLayout;
 import android.widget.TimePicker;
 import android.widget.TimePicker.OnTimeChangedListener;
-import android.widget.Toast;
 
 import com.dat255.alarmclock.R;
 import com.dat255.alarmclock.logic.alarm.AlarmManager;
@@ -23,6 +22,7 @@ import com.dat255.alarmclock.logic.alarm.properties.IAlarmProperty;
 import com.dat255.alarmclock.logic.alarm.properties.SoundProperty;
 import com.dat255.alarmclock.logic.alarm.properties.VibrationProperty;
 import com.dat255.alarmclock.logic.group.GroupManager;
+import com.dat255.alarmclock.utilities.Tools;
 
 public class AlarmActivity extends Activity implements OnClickListener {
 
@@ -177,17 +177,7 @@ public class AlarmActivity extends Activity implements OnClickListener {
 		alarm.enable();
 
 		// Notify the user on when the alarm will sound
-		long alarmTriggerTime = alarm.getTriggerTime();
-		long currentTime = Calendar.getInstance().getTimeInMillis();
-
-		long hoursUntilTriggered = (alarmTriggerTime - currentTime) / (1000 * 3600);
-		long minutesUntilTriggered = (alarmTriggerTime - currentTime) / (1000 * 60) - hoursUntilTriggered * 60;
-
-		Toast.makeText(
-				this,
-				getString(R.string.alarm_set_to) + "\n" + hoursUntilTriggered + " " + getString(R.string.hours) + " "
-						+ getString(R.string.and) + " " + minutesUntilTriggered + " " + getString(R.string.minutes), Toast.LENGTH_LONG)
-				.show();
+		Tools.showAlarmCountdownToast(this, alarm);
 	}
 
 	private void updateViews() {

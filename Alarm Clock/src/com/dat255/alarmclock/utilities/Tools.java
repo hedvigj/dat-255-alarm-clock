@@ -1,5 +1,6 @@
 package com.dat255.alarmclock.utilities;
 
+import java.util.Calendar;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Map;
@@ -9,7 +10,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.Toast;
 
+import com.dat255.alarmclock.R;
+import com.dat255.alarmclock.logic.alarm.IAlarm;
 import com.dat255.alarmclock.logic.common.IEntity;
 
 public class Tools {
@@ -67,5 +71,27 @@ public class Tools {
 		});
 
 		return true;
+	}
+
+	/**
+	 * Shows a toast with information on when the alarm is set to sound
+	 * 
+	 * @param context
+	 *            the current context
+	 * @param alarm
+	 *            the alarm in focus
+	 */
+	public static void showAlarmCountdownToast(Context context, IAlarm alarm) {
+		long alarmTriggerTime = alarm.getTriggerTime();
+		long currentTime = Calendar.getInstance().getTimeInMillis();
+
+		long hoursUntilTriggered = (alarmTriggerTime - currentTime) / (1000 * 3600);
+		long minutesUntilTriggered = (alarmTriggerTime - currentTime) / (1000 * 60) - hoursUntilTriggered * 60;
+
+		Toast.makeText(
+				context,
+				context.getString(R.string.alarm_set_to) + "\n" + hoursUntilTriggered + " " + context.getString(R.string.hours) + " "
+						+ context.getString(R.string.and) + " " + minutesUntilTriggered + " " + context.getString(R.string.minutes),
+				Toast.LENGTH_LONG).show();
 	}
 }
