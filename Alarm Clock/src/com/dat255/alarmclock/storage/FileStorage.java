@@ -23,7 +23,7 @@ public class FileStorage<T extends Serializable> implements IStorage<T> {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<T> readObjectsFromFile(String classTag) {
+	public List<T> readObjects(String classTag) {
 		List<T> objList = new ArrayList<T>();
 
 		try {
@@ -61,7 +61,7 @@ public class FileStorage<T extends Serializable> implements IStorage<T> {
 	}
 
 	@Override
-	public boolean writeObjectsToFile(String classTag, List<T> objList) {
+	public boolean writeObjects(String classTag, List<T> objList) {
 		try {
 			// Open streams for writing
 			ObjectOutputStream oos = new ObjectOutputStream(
@@ -90,9 +90,9 @@ public class FileStorage<T extends Serializable> implements IStorage<T> {
 	}
 
 	@Override
-	public boolean writeObjectToFile(String classTag, T obj) {
+	public boolean writeObject(String classTag, T obj) {
 		List<T> list = new ArrayList<T>();
 		list.add(obj);
-		return writeObjectsToFile(classTag, list);
+		return writeObjects(classTag, list);
 	}
 }

@@ -27,10 +27,10 @@ public class FileStorageTest extends AndroidTestCase {
 	public void testFileStorage() {
 		// No error should be generated using the constructor
 		for (int i = 0; i < 100; i++) {
-			FileStorage<TestClassOne> testStorageOne = new FileStorage<TestClassOne>(
-					getContext());
-			FileStorage<TestClassTwo> testStorageTwo = new FileStorage<TestClassTwo>(
-					getContext());
+			@SuppressWarnings("unused")
+			FileStorage<TestClassOne> testStorageOne = new FileStorage<TestClassOne>(getContext());
+			@SuppressWarnings("unused")
+			FileStorage<TestClassTwo> testStorageTwo = new FileStorage<TestClassTwo>(getContext());
 		}
 
 	}
@@ -44,8 +44,7 @@ public class FileStorageTest extends AndroidTestCase {
 
 		// Build list to write to files
 		for (int i = 1; i < 100; i++) {
-			TestClassOne testOne = new TestClassOne("StringOne"
-					+ Integer.toString(i), "StringTwo" + Integer.toString(i));
+			TestClassOne testOne = new TestClassOne("StringOne" + Integer.toString(i), "StringTwo" + Integer.toString(i));
 
 			classListOne.add(testOne);
 
@@ -57,10 +56,8 @@ public class FileStorageTest extends AndroidTestCase {
 			classListTwo.add(new TestClassTwo(cloneList));
 
 			// Write to file
-			assert storageOne
-					.writeObjectsToFile(TestClassOne.TAG, classListOne);
-			assert storageTwo
-					.writeObjectsToFile(TestClassTwo.TAG, classListTwo);
+			assert storageOne.writeObjects(TestClassOne.TAG, classListOne);
+			assert storageTwo.writeObjects(TestClassTwo.TAG, classListTwo);
 		}
 
 	}
@@ -72,9 +69,8 @@ public class FileStorageTest extends AndroidTestCase {
 		storageOne = new FileStorage<TestClassOne>(getContext());
 		storageTwo = new FileStorage<TestClassTwo>(getContext());
 
-		for (int i = 1; i < 40; i++) {
-			TestClassOne testOne = new TestClassOne("StringOne"
-					+ Integer.toString(i), "StringTwo" + Integer.toString(i));
+		for (int i = 1; i < 15; i++) {
+			TestClassOne testOne = new TestClassOne("StringOne" + Integer.toString(i), "StringTwo" + Integer.toString(i));
 
 			classListOne.add(testOne);
 
@@ -86,36 +82,28 @@ public class FileStorageTest extends AndroidTestCase {
 			classListTwo.add(new TestClassTwo(cloneList));
 
 			// Write to file
-			storageOne.writeObjectsToFile(TestClassOne.TAG, classListOne);
-			storageTwo.writeObjectsToFile(TestClassTwo.TAG, classListTwo);
+			storageOne.writeObjects(TestClassOne.TAG, classListOne);
+			storageTwo.writeObjects(TestClassTwo.TAG, classListTwo);
 
 			// New FileStorage object should not make a different
 			storageOne = new FileStorage<TestClassOne>(getContext());
 			storageTwo = new FileStorage<TestClassTwo>(getContext());
 
 			// Read from storageOne
-			List<TestClassOne> readFromStorageOne = storageOne
-					.readObjectsFromFile(TestClassOne.TAG);
+			List<TestClassOne> readFromStorageOne = storageOne.readObjects(TestClassOne.TAG);
 
 			// Test all values are intact
 			for (int n = 0; n < i; n++) {
-				assertEquals(readFromStorageOne.get(n).testStringOne,
-						classListOne.get(n).testStringOne);
-				assertEquals(readFromStorageOne.get(n).testStringTwo,
-						classListOne.get(n).testStringTwo);
+				assertEquals(readFromStorageOne.get(n).testStringOne, classListOne.get(n).testStringOne);
+				assertEquals(readFromStorageOne.get(n).testStringTwo, classListOne.get(n).testStringTwo);
 			}
 
 			// Read from storageTwo
-			List<TestClassTwo> readFromStorageTwo = storageTwo
-					.readObjectsFromFile(TestClassTwo.TAG);
+			List<TestClassTwo> readFromStorageTwo = storageTwo.readObjects(TestClassTwo.TAG);
 			// Test that the last value values are intact
 
-			assertEquals(
-					readFromStorageTwo.get(i - 1).list.get(i - 1).testStringOne,
-					classListTwo.get(i - 1).list.get(i - 1).testStringOne);
-			assertEquals(
-					readFromStorageTwo.get(i - 1).list.get(i - 1).testStringTwo,
-					classListTwo.get(i - 1).list.get(i - 1).testStringTwo);
+			assertEquals(readFromStorageTwo.get(i - 1).list.get(i - 1).testStringOne, classListTwo.get(i - 1).list.get(i - 1).testStringOne);
+			assertEquals(readFromStorageTwo.get(i - 1).list.get(i - 1).testStringTwo, classListTwo.get(i - 1).list.get(i - 1).testStringTwo);
 
 		}
 	}
@@ -129,8 +117,7 @@ public class FileStorageTest extends AndroidTestCase {
 
 		// Build list to write to files
 		for (int i = 1; i < 100; i++) {
-			TestClassOne testOne = new TestClassOne("StringOne"
-					+ Integer.toString(i), "StringTwo" + Integer.toString(i));
+			TestClassOne testOne = new TestClassOne("StringOne" + Integer.toString(i), "StringTwo" + Integer.toString(i));
 
 			classListOne.add(testOne);
 
@@ -142,8 +129,8 @@ public class FileStorageTest extends AndroidTestCase {
 			TestClassTwo testTwo = new TestClassTwo(cloneList);
 
 			// Write to file
-			assert storageOne.writeObjectToFile(TestClassOne.TAG, testOne);
-			assert storageTwo.writeObjectToFile(TestClassTwo.TAG, testTwo);
+			assert storageOne.writeObject(TestClassOne.TAG, testOne);
+			assert storageTwo.writeObject(TestClassTwo.TAG, testTwo);
 		}
 
 	}
