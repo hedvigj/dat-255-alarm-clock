@@ -18,7 +18,6 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.CheckedTextView;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import com.dat255.alarmclock.R;
 import com.dat255.alarmclock.logic.alarm.AlarmManager;
@@ -92,10 +91,6 @@ public class GroupActivity extends ListActivity {
 				intent.putExtra("groupid", group.getId());
 
 				context.startActivity(intent);
-
-				// Show which alarm the user clicked on: TEMPORARY
-				Toast.makeText(context, "Clicked on alarm " + alarms.get((int) id).getId(), Toast.LENGTH_SHORT).show();
-
 			}
 		});
 	}

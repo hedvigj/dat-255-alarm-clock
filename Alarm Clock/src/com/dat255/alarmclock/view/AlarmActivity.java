@@ -144,20 +144,18 @@ public class AlarmActivity extends Activity implements OnClickListener {
 		// Set trigger time
 		Calendar time = Calendar.getInstance();
 
-		long currentMilliseconds = time.getTimeInMillis();
-
 		time.set(Calendar.HOUR_OF_DAY, timePicker.getCurrentHour());
 		time.set(Calendar.MINUTE, timePicker.getCurrentMinute());
 		time.set(Calendar.SECOND, 0);
-
-		if (time.getTimeInMillis() < currentMilliseconds) {
-			time.add(Calendar.HOUR_OF_DAY, 24);
-		}
 
 		alarm.setTriggerTime(time.getTimeInMillis());
 
 		// Set alarm properties
 		ArrayList<IAlarmProperty> properties = new ArrayList<IAlarmProperty>();
+
+		// Set the repeat setting
+		// Do something like this: properties.add(new
+		// RepeatProperty(Calendar.WEDNESDAY));
 
 		// Set the vibration and sound properties according to their respective
 		// checkboxes
@@ -172,16 +170,18 @@ public class AlarmActivity extends Activity implements OnClickListener {
 		}
 
 		IAlarmProperty[] array = new IAlarmProperty[properties.size()];
-
 		properties.toArray(array);
-
 		alarm.setProperties(array);
 
 		// Enable the alarm
 		alarm.enable();
 
-		long hoursUntilTriggered = (time.getTimeInMillis() - currentMilliseconds) / (1000 * 3600);
-		long minutesUntilTriggered = (time.getTimeInMillis() - currentMilliseconds) / (1000 * 60) - hoursUntilTriggered * 60;
+		// Notify the user on when the alarm will sound
+		long alarmTriggerTime = alarm.getTriggerTime();
+		long currentTime = Calendar.getInstance().getTimeInMillis();
+
+		long hoursUntilTriggered = (alarmTriggerTime - currentTime) / (1000 * 3600);
+		long minutesUntilTriggered = (alarmTriggerTime - currentTime) / (1000 * 60) - hoursUntilTriggered * 60;
 
 		Toast.makeText(
 				this,

@@ -14,7 +14,6 @@ import android.widget.Toast;
 import com.dat255.alarmclock.R;
 import com.dat255.alarmclock.logic.alarm.AlarmManager;
 import com.dat255.alarmclock.logic.alarm.IAlarm;
-import com.dat255.alarmclock.utilities.Sound;
 
 public class TriggerActivity extends Activity implements OnClickListener {
 	private PowerManager powerManager;
@@ -49,10 +48,6 @@ public class TriggerActivity extends Activity implements OnClickListener {
 	@Override
 	public void onResume() {
 		super.onResume();
-		// Start alarm sound if not already started
-		if (Sound.getInstance().isSoundOn() == false) {
-			// Sound.getInstance().soundLoopStart(this);
-		}
 
 		// Get the id of the alarm that triggered this screen
 		long alarmId = getIntent().getLongExtra("alarmid", 0);
@@ -87,8 +82,6 @@ public class TriggerActivity extends Activity implements OnClickListener {
 	public void onClick(View view) {
 		switch (view.getId()) {
 		case R.id.snoozeButton:
-			Sound.getInstance().soundStop();
-
 			// Create an invisible snooze alarm
 			IAlarm snoozeAlarm = AlarmManager.getInstance().createAlarm(getApplicationContext(), TriggerActivity.class);
 
@@ -106,12 +99,12 @@ public class TriggerActivity extends Activity implements OnClickListener {
 
 			break;
 		case R.id.ignoreButton:
-			Sound.getInstance().soundStop();
+			// Do nothing at the moment, see below
 
 			break;
 		}
 
-		// Stop the alarm
+		// Notify the alarm of the stop
 		alarm.onAlarmStopped(this);
 
 		// Close the activity for now

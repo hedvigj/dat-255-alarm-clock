@@ -60,9 +60,27 @@ public class Alarm implements IAlarm {
 	}
 
 	/**
-	 * Updates all properties of a change in this alarm
+	 * Validates the trigger time of the alarm. The trigger time is only
+	 * considered valid when the alarm is enabled.
 	 */
-	private void updateAlarmProperties() {
+	private void validateTriggerTime() {
+		// If the trigger time is in the past, set it to one day in the future
+		Calendar current = Calendar.getInstance();
+		Calendar value = Calendar.getInstance();
+
+		value.setTimeInMillis(triggerTime);
+
+		if (value.before(current)) {
+			value.set(Calendar.DAY_OF_WEEK, current.get(Calendar.DAY_OF_WEEK) + 1);
+		}
+
+		triggerTime = value.getTimeInMillis();
+	}
+
+	/**
+	 * Occurs when the alarm is set
+	 */
+	private void onAlarmSet() {
 		if (properties != null) {
 			for (IAlarmProperty property : properties) {
 				property.onAlarmSet(this);
@@ -76,10 +94,13 @@ public class Alarm implements IAlarm {
 	@Override
 	public void enable() {
 		if (!enabled) {
-			// Notify all properties
-			updateAlarmProperties();
+			// Validate the trigger time
+			validateTriggerTime();
 
-			// Enable
+			// Notify all properties
+			onAlarmSet();
+
+			// Register the alarm
 			android.app.AlarmManager manager = (android.app.AlarmManager) appContext.getSystemService(Context.ALARM_SERVICE);
 
 			manager.set(android.app.AlarmManager.RTC_WAKEUP, triggerTime, pendingIntent);
@@ -94,7 +115,7 @@ public class Alarm implements IAlarm {
 	@Override
 	public void disable() {
 		if (enabled) {
-			// Disable
+			// Unregister the alarm
 			android.app.AlarmManager manager = (android.app.AlarmManager) appContext.getSystemService(Context.ALARM_SERVICE);
 
 			manager.cancel(pendingIntent);
