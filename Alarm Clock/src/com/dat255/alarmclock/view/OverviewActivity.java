@@ -18,7 +18,6 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
-import android.widget.CheckedTextView;
 import android.widget.EditText;
 import android.widget.ListView;
 
@@ -203,7 +202,6 @@ public class OverviewActivity extends ListActivity {
 
 			return true;
 		case R.id.enable:
-			CheckedTextView chk = (CheckedTextView) info.targetView;
 			group = groups.get((int) info.id);
 
 			// Enable all alarms in the group
@@ -215,7 +213,6 @@ public class OverviewActivity extends ListActivity {
 			return true;
 
 		case R.id.disable:
-			chk = (CheckedTextView) info.targetView;
 			group = groups.get((int) info.id);
 
 			// Disable all alarms in the group
