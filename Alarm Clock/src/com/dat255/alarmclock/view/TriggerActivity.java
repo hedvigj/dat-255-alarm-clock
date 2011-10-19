@@ -51,7 +51,7 @@ public class TriggerActivity extends Activity implements OnClickListener {
 		super.onResume();
 		// Start alarm sound if not already started
 		if (Sound.getInstance().isSoundOn() == false) {
-			Sound.getInstance().soundLoopStart(this);
+			// Sound.getInstance().soundLoopStart(this);
 		}
 
 		// Get the id of the alarm that triggered this screen

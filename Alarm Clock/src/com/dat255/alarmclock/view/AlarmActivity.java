@@ -18,6 +18,8 @@ import android.widget.Toast;
 import com.dat255.alarmclock.R;
 import com.dat255.alarmclock.logic.alarm.AlarmManager;
 import com.dat255.alarmclock.logic.alarm.IAlarm;
+import com.dat255.alarmclock.logic.alarm.properties.IAlarmProperty;
+import com.dat255.alarmclock.logic.alarm.properties.SoundProperty;
 import com.dat255.alarmclock.logic.group.GroupManager;
 
 public class AlarmActivity extends Activity implements OnClickListener {
@@ -151,6 +153,13 @@ public class AlarmActivity extends Activity implements OnClickListener {
 		}
 
 		alarm.setTriggerTime(time.getTimeInMillis());
+
+		// Set alarm properties
+		IAlarmProperty[] properties = new IAlarmProperty[1];
+
+		properties[0] = new SoundProperty();
+
+		alarm.setProperties(properties);
 
 		// Enable the alarm
 		alarm.enable();

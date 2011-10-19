@@ -208,6 +208,7 @@ public class Alarm implements IAlarm {
 	 * @param properties
 	 *            the desired properties
 	 */
+	@Override
 	public void setProperties(IAlarmProperty[] properties) {
 		this.properties = properties;
 	}

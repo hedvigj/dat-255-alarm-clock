@@ -44,7 +44,7 @@ public class Sound {
 	}
 
 	/**
-	 * Stop current sound origeneting from this class
+	 * Stop current sound originating from this class
 	 */
 	public void soundStop() {
 		if (player != null) {

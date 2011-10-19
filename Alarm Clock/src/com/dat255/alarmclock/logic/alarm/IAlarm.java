@@ -2,6 +2,7 @@ package com.dat255.alarmclock.logic.alarm;
 
 import android.content.Context;
 
+import com.dat255.alarmclock.logic.alarm.properties.IAlarmProperty;
 import com.dat255.alarmclock.logic.common.IEntity;
 
 public interface IAlarm extends IEntity {
@@ -35,6 +36,14 @@ public interface IAlarm extends IEntity {
 	 *            true if visible, otherwise false
 	 */
 	public void setVisible(boolean visible);
+
+	/**
+	 * Sets the properties of this alarm
+	 * 
+	 * @param properties
+	 *            the desired properties
+	 */
+	public void setProperties(IAlarmProperty[] properties);
 
 	/**
 	 * Enables the alarm
