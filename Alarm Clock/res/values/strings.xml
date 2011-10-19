@@ -6,6 +6,7 @@
     <string name="alarms">Alarm</string>
     <string name="and">och</string>
     <string name ="cancel">Stäng</string>
+    <string name ="change">Byt namn</string>
     <string name="createalarm">Skapa alarm</string>
     <string name="creategroup">Skapa grupp</string>
     <string name="delete">Radera</string>
