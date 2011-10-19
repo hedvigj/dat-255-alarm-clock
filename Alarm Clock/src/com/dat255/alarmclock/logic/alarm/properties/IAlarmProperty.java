@@ -30,4 +30,11 @@ public interface IAlarmProperty {
 	 */
 	public void onAlarmStopped(Context context);
 
+	/**
+	 * Creates a deep clone if this alarm property
+	 * 
+	 * @return a new IAlarmProperty instance
+	 */
+	public IAlarmProperty deepClone();
+
 }

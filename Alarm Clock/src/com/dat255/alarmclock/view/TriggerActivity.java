@@ -92,6 +92,8 @@ public class TriggerActivity extends Activity implements OnClickListener {
 			// Create an invisible snooze alarm
 			IAlarm snoozeAlarm = AlarmManager.getInstance().createAlarm(getApplicationContext(), TriggerActivity.class);
 
+			snoozeAlarm.setProperties(alarm.getProperties());
+
 			snoozeAlarm.setVisible(false);
 
 			snoozeAlarm.snooze(1);

@@ -204,6 +204,26 @@ public class Alarm implements IAlarm {
 	}
 
 	/**
+	 * Gets a deep clone of all alarm properties
+	 * 
+	 * @return an array of IAlarmProperty instances
+	 */
+	@Override
+	public IAlarmProperty[] getProperties() {
+		if (properties != null) {
+			IAlarmProperty[] output = new IAlarmProperty[properties.length];
+
+			for (int i = 0; i < properties.length; i++) {
+				output[i] = properties[i].deepClone();
+			}
+
+			return output;
+		}
+
+		return null;
+	}
+
+	/**
 	 * Sets the properties of this alarm
 	 * 
 	 * @param properties

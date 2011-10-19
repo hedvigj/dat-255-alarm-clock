@@ -9,11 +9,23 @@ public class VibrationProperty implements IAlarmProperty {
 
 	private Vibrator vibrator;
 
+	/**
+	 * Occurs when the parent alarm is set
+	 * 
+	 * @param triggerTime
+	 *            the set trigger time of the alarm
+	 */
 	@Override
 	public void onAlarmSet(IAlarm reference) {
 		// None
 	}
 
+	/**
+	 * Occurs when the parent alarm is triggered
+	 * 
+	 * @param context
+	 *            the context in which the alarm is triggered
+	 */
 	@Override
 	public void onAlarmTriggered(Context context) {
 		if (vibrator == null) {
@@ -29,6 +41,12 @@ public class VibrationProperty implements IAlarmProperty {
 		}
 	}
 
+	/**
+	 * Occurs when the parent alarm is stopped
+	 * 
+	 * @param context
+	 *            the context in which the alarm is stopped
+	 */
 	@Override
 	public void onAlarmStopped(Context context) {
 		if (vibrator != null) {
@@ -38,6 +56,16 @@ public class VibrationProperty implements IAlarmProperty {
 			// Reset the reference
 			vibrator = null;
 		}
+	}
+
+	/**
+	 * Creates a deep clone if this alarm property
+	 * 
+	 * @return a new IAlarmProperty instance
+	 */
+	@Override
+	public IAlarmProperty deepClone() {
+		return new VibrationProperty();
 	}
 
 }

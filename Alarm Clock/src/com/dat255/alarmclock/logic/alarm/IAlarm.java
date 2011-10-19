@@ -38,6 +38,13 @@ public interface IAlarm extends IEntity {
 	public void setVisible(boolean visible);
 
 	/**
+	 * Gets a deep clone of all alarm properties
+	 * 
+	 * @return an array of IAlarmProperty instances
+	 */
+	public IAlarmProperty[] getProperties();
+
+	/**
 	 * Sets the properties of this alarm
 	 * 
 	 * @param properties
