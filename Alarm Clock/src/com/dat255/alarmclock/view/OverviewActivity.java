@@ -112,6 +112,7 @@ public class OverviewActivity extends ListActivity {
 			// option
 			AlertDialog.Builder alert = new AlertDialog.Builder(this);
 			final EditText input = new EditText(this);
+			input.setSingleLine();
 			alert.setMessage(R.string.namedialog);
 			alert.setView(input);
 			alert.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
