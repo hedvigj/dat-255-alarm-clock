@@ -76,9 +76,10 @@ public class Alarm implements IAlarm {
 	@Override
 	public void enable() {
 		if (!enabled) {
-			// Enable
+			// Notify all properties
 			updateAlarmProperties();
 
+			// Enable
 			android.app.AlarmManager manager = (android.app.AlarmManager) appContext.getSystemService(Context.ALARM_SERVICE);
 
 			manager.set(android.app.AlarmManager.RTC_WAKEUP, triggerTime, pendingIntent);
