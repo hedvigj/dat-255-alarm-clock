@@ -1,0 +1,1 @@
+Alarm Clock is an alarm application, developed for Android, where the user gets more control and more options than with most other alarm applications.
